@@ -1,0 +1,77 @@
+body {
+    background-color: #0f172a; /* Color de fondo base */
+    color: white;
+    /* Scrollbar personalizado para Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #38bdf8 #0f172a;
+}
+
+/* Scrollbar personalizado para Chrome/Edge/Safari */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #1e293b;
+    border-radius: 20px;
+    border: 2px solid #0f172a;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #38bdf8;
+}
+
+/* Color de selección de texto (Efecto Bioluminiscente) */
+::selection {
+    background: #38bdf8;
+    color: #0f172a;
+}
+
+/* Comportamiento de scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+.bio-pulse {
+    animation: pulse-glow 3s infinite;
+}
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.1); }
+    50% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+}
+
+/* Animación de Flotación (Simula estar bajo el agua) */
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Estilos para iconos sociales */
+.social-icons a {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+    transform: scale(1.1);
+    color: #38bdf8;
+}
+
+/* Filtros de degradación para la sección interactiva */
+.degraded {
+    filter: saturate(0.3) blur(1px) brightness(0.8);
+}
+
+.restored {
+    filter: saturate(1) blur(0) brightness(1.1);
+    animation: restore 1s ease-in-out;
+}
+
+@keyframes restore {
+    0% { filter: saturate(0.3) blur(1px) brightness(0.8); }
+    100% { filter: saturate(1) blur(0) brightness(1.1); }
+}
