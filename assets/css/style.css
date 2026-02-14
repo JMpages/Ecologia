@@ -43,12 +43,20 @@ html {
 
 /* Animación de Flotación (Simula estar bajo el agua) */
 .animate-float {
-    animation: float 6s ease-in-out infinite;
+    animation: float 12s ease-in-out infinite;
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(4px, -6px); }
+    50% { transform: translate(0, -10px); }
+    75% { transform: translate(-4px, -6px); }
+    100% { transform: translate(0, 0); }
+}
+
+/* Animación de Paneo para el fondo estático */
+.animate-bg-pan {
+    animation: bg-pan 45s ease-in-out infinite alternate;
 }
 
 /* Estilos para iconos sociales */
@@ -74,4 +82,13 @@ html {
 @keyframes restore {
     0% { filter: saturate(0.3) blur(1px) brightness(0.8); }
     100% { filter: saturate(1) blur(0) brightness(1.1); }
+}
+
+@keyframes bg-pan {
+    from {
+        transform: scale(1.05) translate(0, 0);
+    }
+    to {
+        transform: scale(1.15) translate(-2%, 2%);
+    }
 }

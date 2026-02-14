@@ -10,20 +10,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- 2. Configuración de colores personalizados extraídos del código original -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'deep-abyss': '#0f172a', // Azul muy oscuro
-                        'ocean-depth': '#1e293b', // Azul oscuro pizarra
-                        'primary': '#38bdf8',     // Azul cielo brillante
-                        'coral-glow': '#fb7185',  // Coral/Rosado brillante
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="assets/js/tailwind-config.js"></script>
 
     <!-- 3. Iconos de Google (Material Symbols) -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -47,7 +34,7 @@
 
     <!-- FONDO DE ECOSISTEMA MARINO (Fijo para toda la página) -->
     <div class="fixed inset-0 z-[-1]">
-        <img src="https://img2.rtve.es/n/1650902" alt="Fondo Marino" class="w-full h-full object-cover">
+        <img src="assets/img/fondo_marino.jpg" alt="Fondo Marino" class="w-full h-full object-cover animate-bg-pan">
         <!-- Gradientes cinemáticos: Oscuro abajo para el texto, transparente en el centro para la imagen -->
         <div class="absolute inset-0 bg-gradient-to-t from-deep-abyss via-transparent to-black/50"></div>
         <div class="absolute inset-0 bg-black/20"></div>
@@ -82,22 +69,22 @@
                 <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-white p-2 hover:bg-white/10 rounded-full transition-colors">
                     <span class="material-symbols-outlined">menu</span>
                 </button>
-                <a href="protocol.html" class="hidden md:flex w-10 h-10 items-center justify-center rounded-full bg-primary text-deep-abyss hover:scale-105 transition-transform shadow-[0_0_15px_rgba(56,189,248,0.4)]">
-                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
-                </a>
             </div>
         </div>
 
         <!-- Menú Desplegable Móvil -->
         <div id="mobile-menu" class="hidden md:hidden mt-2 bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-4 flex flex-col gap-2 shadow-2xl">
-            <a href="mission.html" class="flex items-center gap-3 text-slate-300 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-sm font-medium">
-                <span class="material-symbols-outlined">explore</span> Misión
+            <a href="laboratorio.html" class="flex items-center gap-3 text-slate-300 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-sm font-medium">
+                <span class="material-symbols-outlined">science</span> Laboratorio
             </a>
-            <a href="protocol.html" class="flex items-center gap-3 text-slate-300 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-sm font-medium">
-                <span class="material-symbols-outlined">assignment</span> Protocolo
+            <a href="atlas.html" class="flex items-center gap-3 text-slate-300 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-sm font-medium">
+                <span class="material-symbols-outlined">analytics</span> Atlas
             </a>
-            <a href="intel.html" class="flex items-center gap-3 text-slate-300 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-sm font-medium">
-                <span class="material-symbols-outlined">radar</span> Inteligencia
+            <a href="guia.html" class="flex items-center gap-3 text-slate-300 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-sm font-medium">
+                <span class="material-symbols-outlined">checklist</span> Guía
+            </a>
+            <a href="compromiso.html" class="flex items-center gap-3 text-slate-300 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-sm font-medium">
+                <span class="material-symbols-outlined">handshake</span> Compromiso
             </a>
         </div>
     </nav>
@@ -161,134 +148,6 @@
             &copy; 2026 Iniciativa de Recuperación de Aguas Profundas. Todos los sistemas nominales.
         </div>
     </footer>
-
-    <!-- Scripts Interactivos -->
-    <script>
-        // Función para aplicar degradación visual
-        function applyDegradation(type) {
-            const body = document.body;
-            body.classList.add('degraded');
-            // Aquí se podría agregar lógica específica por tipo
-            console.log('Degradación aplicada:', type);
-        }
-
-        // Función para aplicar restauración visual
-        function applyRestoration(type) {
-            const body = document.body;
-            body.classList.remove('degraded');
-            body.classList.add('restored');
-            setTimeout(() => body.classList.remove('restored'), 2000);
-            console.log('Restauración aplicada:', type);
-        }
-
-        // Función para reiniciar entorno
-        function resetEnvironment() {
-            const body = document.body;
-            body.classList.remove('degraded', 'restored');
-        }
-
-        // Función para toggle acciones
-        function toggleAction(checkbox) {
-            if (checkbox.checked) {
-                checkbox.parentElement.classList.add('bg-primary/20');
-            } else {
-                checkbox.parentElement.classList.remove('bg-primary/20');
-            }
-        }
-
-        // Función para mostrar tips
-        function showTip(actionId) {
-            const tips = {
-                action1: "Usa bolsas reutilizables y evita productos empaquetados en plástico.",
-                action2: "Únete a eventos locales de limpieza o organiza uno en tu comunidad.",
-                action3: "Elige pescaderías certificadas por sostenibilidad marina.",
-                action4: "Comparte información en redes sociales y habla con amigos y familia.",
-                action5: "Opta por productos biodegradables y de origen natural.",
-                action6: "Firma peticiones y vota por candidatos pro-ambientales."
-            };
-            alert(tips[actionId]);
-        }
-
-        // Función para seleccionar compromiso
-        function selectCommitment(type) {
-            const feedback = document.getElementById('feedback');
-            feedback.classList.remove('hidden');
-            setTimeout(() => feedback.classList.add('hidden'), 5000);
-            console.log('Compromiso seleccionado:', type);
-        }
-
-        // Inicializar gráficos con Chart.js
-        document.addEventListener('DOMContentLoaded', function() {
-            // Gráfico de Cadena Trófica
-            const cadenaCtx = document.getElementById('cadenaChart').getContext('2d');
-            new Chart(cadenaCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Fitoplancton', 'Zooplancton', 'Peces Pequeños', 'Peces Grandes', 'Mamíferos'],
-                    datasets: [{
-                        label: 'Población Afectada (%)',
-                        data: [20, 35, 50, 70, 85],
-                        backgroundColor: '#38bdf8',
-                        borderColor: '#0f172a',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: { beginAtZero: true, max: 100 }
-                    }
-                }
-            });
-
-            // Gráfico de Ecosistemas Críticos
-            const ecosistemasCtx = document.getElementById('ecosistemasChart').getContext('2d');
-            new Chart(ecosistemasCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Arrecifes de Coral', 'Manglares', 'Praderas Marinas', 'Bosques de Kelp'],
-                    datasets: [{
-                        data: [40, 25, 20, 15],
-                        backgroundColor: ['#fb7185', '#38bdf8', '#10b981', '#f59e0b']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { position: 'bottom' }
-                    }
-                }
-            });
-
-            // Gráfico de Impacto Humano
-            const impactoCtx = document.getElementById('impactoChart').getContext('2d');
-            new Chart(impactoCtx, {
-                type: 'line',
-                data: {
-                    labels: ['2010', '2015', '2020', '2025'],
-                    datasets: [{
-                        label: 'Microplásticos en Dieta Humana (partículas/kg)',
-                        data: [100, 200, 350, 500],
-                        borderColor: '#38bdf8',
-                        backgroundColor: 'rgba(56, 189, 248, 0.1)',
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: { beginAtZero: true }
-                    }
-                }
-            });
-        });
-    </script>
 
 </body>
 </html>
