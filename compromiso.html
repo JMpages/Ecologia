@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪸</text></svg>">
-    <title>El Portal del Compromiso - Deep Sea Recovery</title>
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <title>El Portal del Compromiso</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="assets/js/tailwind-config.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -41,23 +41,29 @@
     </div>
 
     <!-- NAVBAR FLOTANTE -->
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[760px]">
-        <div class="bg-black/40 backdrop-blur-2xl border border-white/10 rounded-full p-3 flex items-center justify-between shadow-[0_0_40px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-black/50">
-            <a href="index.html" class="pl-6 text-xl font-bold tracking-tighter text-white hover:opacity-80 transition-opacity">
-                REEF<span class="text-primary">OLUTION</span>
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[1000px]">
+        <div class="bg-blue-900/40 backdrop-blur-xl border-2 border-white/20 rounded-full p-3 flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-blue-900/60 hover:scale-[1.02]">
+            <a href="index.html" class="pl-6 text-xl font-bold tracking-tighter text-white hover:opacity-80 transition-opacity whitespace-nowrap">
+                MARES <span class="text-primary">VIVOS</span>
             </a>
             <div class="hidden md:flex items-center bg-white/5 rounded-full px-1 py-1 border border-white/5">
-                <a href="laboratorio.html" class="flex items-center gap-2 px-6 py-3 text-sm font-medium text-slate-300 hover:bg-white/10 hover:text-white transition-all rounded-full">
+                <a href="laboratorio.html" class="nav-flash flex items-center gap-2 px-4 py-3 text-sm font-medium text-slate-300 hover:text-white transition-all rounded-full">
                     <span class="material-symbols-outlined text-lg">science</span> Laboratorio
                 </a>
-                <a href="atlas.html" class="flex items-center gap-2 px-6 py-3 text-sm font-medium text-slate-300 hover:bg-white/10 hover:text-white transition-all rounded-full">
+                <a href="atlas.html" class="nav-flash flex items-center gap-2 px-4 py-3 text-sm font-medium text-slate-300 hover:text-white transition-all rounded-full">
                     <span class="material-symbols-outlined text-lg">analytics</span> Atlas
                 </a>
-                <a href="guia.html" class="flex items-center gap-2 px-6 py-3 text-sm font-medium text-slate-300 hover:bg-white/10 hover:text-white transition-all rounded-full">
+                <a href="especies.html" class="nav-flash flex items-center gap-2 px-4 py-3 text-sm font-medium text-slate-300 hover:text-white transition-all rounded-full">
+                    <span class="material-symbols-outlined text-lg">pets</span> Especies
+                </a>
+                <a href="guia.html" class="nav-flash flex items-center gap-2 px-4 py-3 text-sm font-medium text-slate-300 hover:text-white transition-all rounded-full">
                     <span class="material-symbols-outlined text-lg">checklist</span> Guía
                 </a>
-                <a href="compromiso.html" class="flex items-center gap-2 px-6 py-3 text-sm font-medium text-slate-300 hover:bg-white/10 hover:text-white transition-all rounded-full bg-primary/20">
+                <a href="compromiso.html" class="nav-flash active-nav flex items-center gap-2 px-4 py-3 text-sm font-medium text-slate-300 hover:text-white transition-all rounded-full">
                     <span class="material-symbols-outlined text-lg">handshake</span> Compromiso
+                </a>
+                <a href="fuentes.html" class="nav-flash flex items-center gap-2 px-4 py-3 text-sm font-medium text-slate-300 hover:text-white transition-all rounded-full">
+                    <span class="material-symbols-outlined text-lg">menu_book</span> Fuentes
                 </a>
             </div>
             <div class="flex items-center gap-2">
@@ -66,18 +72,24 @@
                 </button>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden mt-2 bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-4 flex flex-col gap-2 shadow-2xl">
-            <a href="laboratorio.html" class="flex items-center gap-3 text-slate-300 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-sm font-medium">
+        <div id="mobile-menu" class="hidden md:hidden mt-2 bg-blue-900/90 backdrop-blur-xl border-2 border-white/20 rounded-3xl p-4 flex flex-col gap-2 shadow-2xl">
+            <a href="laboratorio.html" class="nav-flash flex items-center gap-3 text-slate-300 hover:text-white px-4 py-3 rounded-xl transition-all text-sm font-medium">
                 <span class="material-symbols-outlined">science</span> Laboratorio
             </a>
-            <a href="atlas.html" class="flex items-center gap-3 text-slate-300 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-sm font-medium">
+            <a href="atlas.html" class="nav-flash flex items-center gap-3 text-slate-300 hover:text-white px-4 py-3 rounded-xl transition-all text-sm font-medium">
                 <span class="material-symbols-outlined">analytics</span> Atlas
             </a>
-            <a href="guia.html" class="flex items-center gap-3 text-slate-300 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-sm font-medium">
+            <a href="especies.html" class="nav-flash flex items-center gap-3 text-slate-300 hover:text-white px-4 py-3 rounded-xl transition-all text-sm font-medium">
+                <span class="material-symbols-outlined">pets</span> Especies
+            </a>
+            <a href="guia.html" class="nav-flash flex items-center gap-3 text-slate-300 hover:text-white px-4 py-3 rounded-xl transition-all text-sm font-medium">
                 <span class="material-symbols-outlined">checklist</span> Guía
             </a>
-            <a href="compromiso.html" class="flex items-center gap-3 text-slate-300 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-colors text-sm font-medium">
+            <a href="compromiso.html" class="nav-flash active-nav flex items-center gap-3 text-slate-300 hover:text-white px-4 py-3 rounded-xl transition-all text-sm font-medium">
                 <span class="material-symbols-outlined">handshake</span> Compromiso
+            </a>
+            <a href="fuentes.html" class="nav-flash flex items-center gap-3 text-slate-300 hover:text-white px-4 py-3 rounded-xl transition-all text-sm font-medium">
+                <span class="material-symbols-outlined">menu_book</span> Fuentes
             </a>
         </div>
     </nav>
@@ -88,32 +100,56 @@
             <div class="mb-16">
                 <span class="text-primary font-bold tracking-widest uppercase text-xs">Compromiso Personal</span>
                 <h1 class="text-6xl md:text-8xl font-black tracking-tighter mt-4 mb-8">El Portal del Compromiso</h1>
-                <p class="text-xl text-slate-400 max-w-2xl mx-auto">Tu acción individual puede crear ondas de cambio. Selecciona tu compromiso y únete a la red global de guardianes oceánicos.</p>
+                <p class="text-xl text-slate-200 max-w-2xl mx-auto">Tu acción individual puede crear ondas de cambio. Selecciona tu compromiso y únete a la red global de guardianes oceánicos.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <button class="group p-8 bg-ocean-depth/50 border border-white/10 rounded-[3rem] hover:bg-primary/20 hover:border-primary/50 transition-all transform hover:-translate-y-2" onclick="selectCommitment('reducir')">
+                <button class="group p-8 glass-card rounded-[3rem]" onclick="selectCommitment('reducir', 'Reducir consumo')">
                     <div class="text-center">
                         <span class="material-symbols-outlined text-6xl mb-6 text-primary group-hover:animate-bounce">reduce_capacity</span>
                         <h3 class="text-2xl font-bold mb-4">Reducir Consumo</h3>
                         <p class="text-slate-400 mb-6">Comprometerme a reducir mi huella plástica en un 50% este año.</p>
-                        <div class="text-sm text-primary font-semibold">Impacto: 500kg CO2/año</div>
+                        <div class="text-sm text-primary font-semibold">Impacto: Menos residuos plásticos</div>
                     </div>
                 </button>
-                <button class="group p-8 bg-ocean-depth/50 border border-white/10 rounded-[3rem] hover:bg-coral-glow/20 hover:border-coral-glow/50 transition-all transform hover:-translate-y-2" onclick="selectCommitment('educar')">
+                <button class="group p-8 glass-card rounded-[3rem]" onclick="selectCommitment('educar', 'Educar')">
                     <div class="text-center">
                         <span class="material-symbols-outlined text-6xl mb-6 text-coral-glow group-hover:animate-bounce">school</span>
                         <h3 class="text-2xl font-bold mb-4">Educar</h3>
-                        <p class="text-slate-400 mb-6">Difundir conciencia sobre contaminación marina a 10 personas al mes.</p>
-                        <div class="text-sm text-coral-glow font-semibold">Impacto: 120 personas/año</div>
+                        <p class="text-slate-400 mb-6">Difundir conciencia sobre contaminación marina a 5 personas al mes.</p>
+                        <div class="text-sm text-coral-glow font-semibold">Impacto: Una persona informada genera cambio.</div>
                     </div>
                 </button>
-                <button class="group p-8 bg-ocean-depth/50 border border-white/10 rounded-[3rem] hover:bg-green-500/20 hover:border-green-500/50 transition-all transform hover:-translate-y-2" onclick="selectCommitment('apoyar')">
+                <button class="group p-8 glass-card rounded-[3rem]" onclick="selectCommitment('apoyar', 'Apoyar')">
                     <div class="text-center">
                         <span class="material-symbols-outlined text-6xl mb-6 text-green-400 group-hover:animate-bounce">volunteer_activism</span>
                         <h3 class="text-2xl font-bold mb-4">Apoyar</h3>
                         <p class="text-slate-400 mb-6">Contribuir mensualmente a organizaciones de conservación marina.</p>
-                        <div class="text-sm text-green-400 font-semibold">Impacto: $50/mes para arrecifes</div>
+                        <div class="text-sm text-green-400 font-semibold">Impacto: Más recursos, más protección marina.</div>
+                    </div>
+                </button>
+                <button class="group p-8 glass-card rounded-[3rem]" onclick="selectCommitment('consumo-energetico', 'Reducir Consumo Energético')">
+                    <div class="text-center">
+                        <span class="material-symbols-outlined text-6xl mb-6 text-primary group-hover:animate-bounce">bolt</span>
+                        <h3 class="text-2xl font-bold mb-4">Reducir Consumo Energético</h3>
+                        <p class="text-slate-400 mb-6">Usar menos electricidad disminuye emisiones que afectan los océanos.</p>
+                        <div class="text-sm text-primary font-semibold">Impacto: Menos calentamiento, mares más sanos.</div>
+                    </div>
+                </button>
+                <button class="group p-8 glass-card rounded-[3rem]" onclick="selectCommitment('proteger-playas', 'Proteger playas')">
+                    <div class="text-center">
+                        <span class="material-symbols-outlined text-6xl mb-6 text-coral-glow group-hover:animate-bounce">beach_access</span>
+                        <h3 class="text-2xl font-bold mb-4">Proteger playas</h3>
+                        <p class="text-slate-400 mb-6">Cuidar costas y orillas evita la degradación de hábitats clave para especies marinas.</p>
+                        <div class="text-sm text-coral-glow font-semibold">Impacto: Costas más resilientes</div>
+                    </div>
+                </button>
+                <button class="group p-8 glass-card rounded-[3rem]" onclick="selectCommitment('participar-limpiezas', 'Participar en limpiezas')">
+                    <div class="text-center">
+                        <span class="material-symbols-outlined text-6xl mb-6 text-green-400 group-hover:animate-bounce">cleaning_services</span>
+                        <h3 class="text-2xl font-bold mb-4">Participar en limpiezas</h3>
+                        <p class="text-slate-400 mb-6">Sumarse a jornadas comunitarias reduce basura y promueve conciencia ambiental.</p>
+                        <div class="text-sm text-green-400 font-semibold">Impacto: Comunidades más activas</div>
                     </div>
                 </button>
             </div>
@@ -123,34 +159,21 @@
                 <div class="inline-block p-12 bg-gradient-to-br from-primary to-primary/80 text-deep-abyss rounded-[3rem] shadow-2xl animate-float border-4 border-white/20">
                     <div class="text-center">
                         <span class="material-symbols-outlined text-8xl mb-6 animate-bounce">celebration</span>
-                        <h3 class="text-4xl font-black mb-4">¡Bienvenido a la Red!</h3>
-                        <p class="text-xl mb-6">Tu compromiso activa el protocolo de restauración global. Juntos salvaremos nuestros océanos.</p>
+                        <h3 class="text-4xl font-black mb-4">¡Gracias por tu compromiso!</h3>
+                        <p class="text-xl mb-6">Tu acción <span id="selected-commitment-label" class="font-black">ambiental</span> suma al cuidado real del océano.</p>
                         <div class="flex items-center justify-center gap-4 text-sm">
                             <span class="material-symbols-outlined">verified</span>
-                            <span>Compromiso registrado en la blockchain oceánica</span>
+                            <span>Compromiso registrado en la red ciudadana</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Estadísticas Globales -->
-            <div class="mt-16 grid md:grid-cols-4 gap-8">
-                <div class="bg-deep-abyss/50 border border-white/10 p-6 rounded-2xl text-center">
-                    <div class="text-3xl font-bold text-primary mb-2">12,847</div>
-                    <div class="text-sm text-slate-400">Guardianes Activos</div>
-                </div>
-                <div class="bg-deep-abyss/50 border border-white/10 p-6 rounded-2xl text-center">
-                    <div class="text-3xl font-bold text-coral-glow mb-2">2.3M</div>
-                    <div class="text-sm text-slate-400">kg Basura Recogida</div>
-                </div>
-                <div class="bg-deep-abyss/50 border border-white/10 p-6 rounded-2xl text-center">
-                    <div class="text-3xl font-bold text-green-400 mb-2">847</div>
-                    <div class="text-sm text-slate-400">Arrecifes Protegidos</div>
-                </div>
-                <div class="bg-deep-abyss/50 border border-white/10 p-6 rounded-2xl text-center">
-                    <div class="text-3xl font-bold text-primary mb-2">94%</div>
-                    <div class="text-sm text-slate-400">Tasa de Éxito</div>
-                </div>
+            <div class="max-w-4xl mx-auto mt-24">
+                <p class="text-xl md:text-2xl italic font-black text-white leading-tight">
+                    “Lo que haces marca la diferencia, y tienes que decidir qué tipo de diferencia quieres hacer.”
+                </p>
+                <p class="text-slate-200 mt-3 text-2xl font-bold">— Jane Goodall</p>
             </div>
         </div>
     </section>
@@ -159,5 +182,7 @@
     <script src="assets/js/compromiso.js"></script>
     <!-- Script de Fondo Oceánico -->
     <script src="assets/js/ocean-bg.js"></script>
+    <!-- Script Global de Estado del Ecosistema -->
+    <script src="assets/js/ecosystem-state.js"></script>
 </body>
 </html>

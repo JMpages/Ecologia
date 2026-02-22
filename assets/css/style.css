@@ -4,6 +4,7 @@ body {
     /* Scrollbar personalizado para Firefox */
     scrollbar-width: thin;
     scrollbar-color: #38bdf8 #0f172a;
+    overflow-x: hidden; /* Evitar scroll horizontal no deseado */
 }
 
 /* Scrollbar personalizado para Chrome/Edge/Safari */
@@ -14,7 +15,7 @@ body {
     background: #0f172a;
 }
 ::-webkit-scrollbar-thumb {
-    background-color: #1e293b;
+    background-color: #38bdf8; /* Más brillante para estilo cartoon */
     border-radius: 20px;
     border: 2px solid #0f172a;
 }
@@ -31,6 +32,13 @@ body {
 /* Comportamiento de scroll suave */
 html {
     scroll-behavior: smooth;
+}
+
+/* Accesibilidad: Foco visible para navegación por teclado (Importante para accesibilidad) */
+:focus-visible {
+    outline: 2px solid #38bdf8;
+    outline-offset: 4px;
+    border-radius: 4px;
 }
 
 .bio-pulse {
@@ -52,11 +60,6 @@ html {
     50% { transform: translate(0, -10px); }
     75% { transform: translate(-4px, -6px); }
     100% { transform: translate(0, 0); }
-}
-
-/* Animación de Paneo para el fondo estático */
-.animate-bg-pan {
-    animation: bg-pan 45s ease-in-out infinite alternate;
 }
 
 /* Estilos para iconos sociales */
@@ -84,11 +87,285 @@ html {
     100% { filter: saturate(1) blur(0) brightness(1.1); }
 }
 
-@keyframes bg-pan {
-    from {
-        transform: scale(1.05) translate(0, 0);
-    }
+/* Efecto de Flash/Brillo en Tarjetas */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.nav-flash {
+    position: relative;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* Estado Activo: Borde completo iluminado estático */
+.nav-flash.active-nav {
+    border-color: #38bdf8;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    background-color: rgba(56, 189, 248, 0.1);
+}
+
+/* Efecto de Flash (Movimiento) solo en Hover */
+.nav-flash::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    padding: 2px; /* Grosor más fino para el menú */
+    border-radius: inherit;
+    background: conic-gradient(from var(--angle), transparent 0%, #38bdf8 30%, transparent 60%);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    animation: rotate-border 3s linear infinite;
+}
+
+.nav-flash:hover::after {
+    opacity: 1;
+}
+
+@keyframes rotate-border {
     to {
-        transform: scale(1.15) translate(-2%, 2%);
+        --angle: 360deg;
     }
+}
+
+/* Accesibilidad: Respetar preferencias de movimiento reducido del sistema */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    
+    .animate-float, 
+    .bio-pulse, 
+    .nav-flash::after,
+    .animate-bounce,
+    .animate-pulse {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* --- NUEVO DISEÑO: Tarjetas de Información Mejoradas --- */
+.glass-card {
+    /* Fondo Azul Oceánico Profundo con transparencia (Deep Sea Blue) */
+    background-color: rgba(16, 52, 82, 0.75) !important; 
+    backdrop-filter: blur(12px); /* Blur un poco más suave para efecto agua */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(136, 198, 241, 0.25); /* Borde azul claro sutil */
+    box-shadow: 0 8px 32px rgba(0, 20, 40, 0.3);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.glass-card:hover {
+    transform: translateY(-6px) scale(1.01); /* Animación de flotación */
+    background-color: rgba(20, 65, 100, 0.85) !important; /* Más brillante e intenso al interactuar */
+    border-color: rgba(136, 198, 241, 0.6); /* Borde brillante cyan */
+    box-shadow: 0 20px 50px rgba(0, 20, 40, 0.5), 0 0 25px rgba(136, 198, 241, 0.2); /* Resplandor azulado */
+}
+
+/* --- ESTILOS PERSONALIZADOS PARA LEAFLET (MAPA ATLAS) --- */
+
+/* Contenedor del mapa */
+#panama-map {
+    background-color: #0f172a; /* Fondo oscuro mientras cargan los tiles */
+}
+
+/* Reset para el ícono personalizado */
+.custom-leaflet-icon {
+    background: transparent;
+    border: none;
+}
+
+/* Estilo del marcador circular */
+.map-marker-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease;
+}
+.map-marker-icon:hover {
+    transform: scale(1.1);
+}
+.map-marker-icon .material-symbols-outlined {
+    font-size: 20px;
+}
+
+/* Estilo del Popup (para que parezca un glass-card) */
+.leaflet-popup-content-wrapper {
+    background-color: rgba(16, 52, 82, 0.85) !important; /* Mismo que .glass-card */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #e2e8f0; /* slate-200 */
+    border: 1px solid rgba(136, 198, 241, 0.4);
+    border-radius: 1rem; /* 16px */
+    box-shadow: 0 8px 32px rgba(0, 20, 40, 0.4);
+    padding: 0.25rem;
+}
+
+.leaflet-popup-content {
+    margin: 0.75rem !important; /* Reducido a 12px para móvil */
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.leaflet-popup-tip {
+    background: rgba(16, 52, 82, 0.85) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.leaflet-popup-close-button {
+    color: #e2e8f0 !important;
+    padding: 8px 8px 0 0 !important;
+}
+.leaflet-popup-close-button:hover {
+    background-color: transparent !important;
+    color: #fff !important;
+}
+
+/* --- CONTROLES ESTILO GOOGLE MAPS --- */
+
+/* 1. Botón de Pantalla Completa (Top Right) */
+.gmaps-fullscreen-control {
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    width: 32px; /* Reducido de 40px */
+    height: 32px; /* Reducido de 40px */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    transition: background 0.2s;
+}
+.gmaps-fullscreen-control:hover {
+    background: #f1f1f1;
+}
+.gmaps-fullscreen-control span {
+    color: #666;
+    font-size: 20px; /* Icono más pequeño */
+}
+
+/* 2. Controles de Mapa (Nuevo Diseño Horizontal) */
+
+/* Contenedor principal en la parte inferior */
+.map-controls-container {
+    margin-bottom: 16px !important;
+    margin-left: 10px !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1000;
+}
+
+/* Botón de Tipo de Mapa (Cuadrado redondeado estilo App) */
+.map-type-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    position: relative;
+}
+.map-type-btn:hover {
+    transform: scale(1.05);
+    border-color: #fff;
+}
+.map-type-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    padding: 2px 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/* Lista Horizontal de Filtros (Chips) */
+.map-filters-scroll {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 6px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    
+    /* Estilo Glassmorphism */
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+.map-filters-scroll::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.filter-chip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.05);
+    color: #cbd5e1; /* slate-300 */
+    border: 1px solid transparent;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.filter-chip:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+.filter-name {
+    display: none;
+}
+
+/* Estado Activo */
+.filter-chip.active {
+    /* El color de fondo se inyecta vía JS */
+    color: #0f172a; /* Texto oscuro para contraste */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+    border-color: rgba(255,255,255,0.4);
+    font-weight: 700;
+}
+
+.filter-chip .material-symbols-outlined {
+    font-size: 20px;
 }
