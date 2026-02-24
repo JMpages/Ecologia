@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <link rel="icon" href="../assets/img/logo.png" type="image/png">
     <title>Laboratorio Interactivo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="assets/js/tailwind-config.js"></script>
+    <script src="../assets/js/tailwind-config.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
@@ -19,7 +19,7 @@
 
     <!-- CONTENEDOR DE LA SIMULACIÓN (Recibe los efectos de daño) -->
     <div id="simulation-container" class="relative w-full min-h-screen transition-all duration-500">
-    <!-- FONDO DE ECOSISTEMA MARINO DINÁMICO - ESTILO CARIBE�'O -->
+    <!-- FONDO DE ECOSISTEMA MARINO DINÁMICO - ESTILO CARIBE'O -->
     <div id="ocean-bg" class="fixed inset-0 z-[-1]">
         <canvas id="ocean-canvas" class="w-full h-full"></canvas>
         <div class="absolute inset-0 bg-gradient-to-t from-caribbean-blue via-tropical-teal to-ocean-green/30"></div>
@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <!-- PARTÍCULAS DE CONTAMINACI�"N -->
+    <!-- PARTÍCULAS DE CONTAMINACI"N -->
     <div id="particles" class="fixed inset-0 z-[-1] pointer-events-none"></div>
 
     <!-- CAPA DE INMERSIÓN (Vignette y efectos) -->
@@ -53,7 +53,7 @@
     <!-- NAVBAR FLOTANTE -->
     <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[1000px]">
         <div class="bg-blue-900/40 backdrop-blur-xl border-2 border-white/20 rounded-full p-3 flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-blue-900/60 hover:scale-[1.02]">
-            <a href="index.html" class="pl-6 text-xl font-bold tracking-tighter text-white hover:opacity-80 transition-opacity whitespace-nowrap">
+            <a href="../index.html" class="pl-6 text-xl font-bold tracking-tighter text-white hover:opacity-80 transition-opacity whitespace-nowrap">
                 MARES <span class="text-primary">VIVOS</span>
             </a>
             <div class="hidden md:flex items-center bg-white/5 rounded-full px-1 py-1 border border-white/5">
@@ -108,127 +108,108 @@
     <div id="hud-container" class="relative z-10 w-full min-h-screen flex flex-col pointer-events-none">
         
         <!-- Header del Lab (Título) -->
-        <div class="pt-28 pb-4 text-center pointer-events-auto">
+        <div class="pt-24 pb-4 text-center pointer-events-auto">
             <span class="text-primary font-bold tracking-[0.3em] uppercase text-xs shadow-black drop-shadow-md">Panel de Control Ambiental</span>
-            <h1 class="text-3xl md:text-5xl font-black tracking-tighter text-white drop-shadow-xl">¿QUÉ PASARÍA <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-300">SI...?</span></h1>
-            <p class="text-slate-200 mt-4 max-w-2xl mx-auto text-lg leading-relaxed drop-shadow-md">
-                Experimenta en tiempo real cómo las acciones humanas transforman el océano. Activa amenazas o aplica soluciones y observa las consecuencias en el ecosistema.
-            </p>
+            <h1 class="text-4xl md:text-6xl lg:text-8xl leading-[1.15] px-4 pb-2 font-black tracking-tighter text-white drop-shadow-xl mt-5 mb-6">¿QUÉ PASARÍA <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-300 inline-block pr-3">SI...?</span></h1>
+            <p class="text-slate-200 mt-3 max-w-2xl mx-auto text-xl leading-relaxed">Usa los botones de la mesa de control para experimentar. Activa una amenaza y observa el impacto, luego aplica una solución para restaurar el océano.</p>
         </div>
 
-        <!-- Área Central de Controles (HUD) -->
-        <div class="flex-1 flex flex-col md:flex-row items-start md:items-center justify-between px-4 md:px-12 gap-6 max-w-[1800px] mx-auto w-full">
+        <!-- Espacio flexible para empujar controles abajo -->
+        <div class="flex-1 min-h-[250px]"></div>
+
+        <!-- MESA DE CONTROL (Bottom Layout) -->
+        <div class="relative z-20 px-4 pb-8 w-full pointer-events-none">
+            <div class="flex flex-col xl:flex-row items-end justify-center gap-6 max-w-[1800px] mx-auto pointer-events-auto bg-slate-900/60 backdrop-blur-2xl p-6 md:p-10 rounded-[3rem] border border-white/10 shadow-[0_0_100px_rgba(56,189,248,0.2)] relative overflow-hidden">
+                
+                <!-- Efectos de Fondo de la Mesa de Control -->
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_rgba(34,211,238,0.8)]"></div>
+                <div class="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-cyan-500/5 to-transparent pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-30 pointer-events-none"></div>
             
             <!-- PANEL IZQUIERDO: AMENAZAS -->
-            <div id="negative-card" class="glass-card pointer-events-auto w-full md:w-80 p-5 rounded-3xl group/panel">
-                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
-                    <div class="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-400">
-                        <span class="material-symbols-outlined">warning</span>
-                    </div>
-                    <div>
+            <div id="negative-card" class="glass-card w-full max-w-2xl p-4 rounded-3xl group/panel transition-all duration-300 hover:border-red-500/30">
+                <div class="flex items-center justify-between mb-3 border-b border-white/5 pb-2 px-2">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-red-400">warning</span>
                         <h3 class="font-bold text-white leading-tight">Amenazas</h3>
-                        <p class="text-xs text-red-300/70 uppercase tracking-wider">Detectar Impacto</p>
                     </div>
+                    <span class="text-[10px] text-red-300/70 uppercase tracking-wider font-bold">Input</span>
                 </div>
-                <div class="space-y-3">
+                
+                <!-- Grid Horizontal de Botones -->
+                <div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
                     <!-- Botones compactos -->
-                    <button id="btn-threat-basura" class="w-full flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-red-500/20 border border-transparent hover:border-red-500/30 transition-all group" onclick="applyDegradation('basura')">
-                        <span class="material-symbols-outlined text-slate-400 group-hover:text-red-400 group-hover:animate-bounce">delete</span>
-                        <div class="text-left">
-                            <div class="text-sm font-semibold text-slate-200 group-hover:text-white">Plástico</div>
-                        </div>
+                    <button id="btn-threat-basura" class="flex flex-col items-center justify-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-red-500/20 border border-transparent hover:border-red-500/30 transition-all group h-24" onclick="applyDegradation('basura')">
+                        <span class="material-symbols-outlined text-3xl text-slate-400 group-hover:text-red-400 group-hover:scale-110 transition-transform">delete</span>
+                        <span class="text-xs font-bold text-slate-300 group-hover:text-white text-center leading-tight">Plástico</span>
                     </button>
-                    <button id="btn-threat-reciclaje" class="w-full flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-red-500/20 border border-transparent hover:border-red-500/30 transition-all group" onclick="applyDegradation('reciclaje')">
-                        <span class="material-symbols-outlined text-slate-400 group-hover:text-red-400 group-hover:animate-bounce">recycling</span>
-                        <div class="text-left">
-                            <div class="text-sm font-semibold text-slate-200 group-hover:text-white">Blanqueamiento</div>
-                        </div>
+                    <button id="btn-threat-reciclaje" class="flex flex-col items-center justify-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-red-500/20 border border-transparent hover:border-red-500/30 transition-all group h-24" onclick="applyDegradation('reciclaje')">
+                        <span class="material-symbols-outlined text-3xl text-slate-400 group-hover:text-red-400 group-hover:scale-110 transition-transform">thermostat</span>
+                        <span class="text-xs font-bold text-slate-300 group-hover:text-white text-center leading-tight">Calor</span>
                     </button>
-                    <button id="btn-threat-pesca" class="w-full flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-red-500/20 border border-transparent hover:border-red-500/30 transition-all group" onclick="applyDegradation('pesca')">
-                        <span class="material-symbols-outlined text-slate-400 group-hover:text-red-400 group-hover:animate-bounce">set_meal</span>
-                        <div class="text-left">
-                            <div class="text-sm font-semibold text-slate-200 group-hover:text-white">Sobrepesca</div>
-                        </div>
+                    <button id="btn-threat-pesca" class="flex flex-col items-center justify-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-red-500/20 border border-transparent hover:border-red-500/30 transition-all group h-24" onclick="applyDegradation('pesca')">
+                        <span class="material-symbols-outlined text-3xl text-slate-400 group-hover:text-red-400 group-hover:scale-110 transition-transform">phishing</span>
+                        <span class="text-xs font-bold text-slate-300 group-hover:text-white text-center leading-tight">Pesca</span>
                     </button>
-                    <button id="btn-threat-petroleo" class="w-full flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-red-500/20 border border-transparent hover:border-red-500/30 transition-all group" onclick="applyDegradation('petroleo')">
-                        <span class="material-symbols-outlined text-slate-400 group-hover:text-red-400 group-hover:animate-bounce">oil_barrel</span>
-                        <div class="text-left">
-                            <div class="text-sm font-semibold text-slate-200 group-hover:text-white">Petróleo</div>
-                        </div>
+                    <button id="btn-threat-petroleo" class="flex flex-col items-center justify-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-red-500/20 border border-transparent hover:border-red-500/30 transition-all group h-24" onclick="applyDegradation('petroleo')">
+                        <span class="material-symbols-outlined text-3xl text-slate-400 group-hover:text-red-400 group-hover:scale-110 transition-transform">oil_barrel</span>
+                        <span class="text-xs font-bold text-slate-300 group-hover:text-white text-center leading-tight">Petróleo</span>
                     </button>
-                    <button id="btn-threat-ruido" class="w-full flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-red-500/20 border border-transparent hover:border-red-500/30 transition-all group" onclick="applyDegradation('ruido')">
-                        <span class="material-symbols-outlined text-slate-400 group-hover:text-red-400 group-hover:animate-bounce">graphic_eq</span>
-                        <div class="text-left">
-                            <div class="text-sm font-semibold text-slate-200 group-hover:text-white">Ruido</div>
-                        </div>
+                    <button id="btn-threat-ruido" class="flex flex-col items-center justify-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-red-500/20 border border-transparent hover:border-red-500/30 transition-all group h-24" onclick="applyDegradation('ruido')">
+                        <span class="material-symbols-outlined text-3xl text-slate-400 group-hover:text-red-400 group-hover:scale-110 transition-transform">graphic_eq</span>
+                        <span class="text-xs font-bold text-slate-300 group-hover:text-white text-center leading-tight">Ruido</span>
                     </button>
                 </div>
             </div>
 
-            <!-- ESPACIO CENTRAL (3D) -->
-            <div class="flex-1 h-full min-h-[200px]"></div>
+            <!-- MONITOR CENTRAL (Status Integrado) -->
+            <div class="glass-card px-6 py-4 rounded-2xl flex flex-col items-center justify-center mb-4 xl:mb-0 order-first xl:order-none w-full xl:w-auto shadow-[0_0_30px_rgba(0,0,0,0.2)] hover:!transform-none hover:!shadow-[0_0_30px_rgba(0,0,0,0.2)]">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Integridad</span>
+                <div class="flex items-center gap-3">
+                    <div id="ocean-health" class="w-3 h-3 rounded-full bg-green-400 animate-pulse shadow-[0_0_10px_#4ade80]"></div>
+                    <span id="ocean-status" class="text-xl font-black text-green-400 tracking-tight">100%</span>
+                </div>
+            </div>
 
             <!-- PANEL DERECHO: SOLUCIONES -->
-            <div id="restoration-card" class="glass-card pointer-events-auto w-full md:w-80 p-5 rounded-3xl group/panel">
-                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
-                    <div class="w-10 h-10 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400">
-                        <span class="material-symbols-outlined">healing</span>
-                    </div>
-                    <div>
+            <div id="restoration-card" class="glass-card w-full max-w-2xl p-4 rounded-3xl group/panel transition-all duration-300 hover:!transform-none">
+                <div class="flex items-center justify-between mb-3 border-b border-white/5 pb-2 px-2">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-cyan-400">healing</span>
                         <h3 class="font-bold text-white leading-tight">Restauración</h3>
-                        <p class="text-xs text-cyan-300/70 uppercase tracking-wider">Aplicar Protocolo</p>
                     </div>
+                    <span class="text-[10px] text-cyan-300/70 uppercase tracking-wider font-bold">Protocol</span>
                 </div>
-                <div class="space-y-3">
+                
+                <!-- Grid Horizontal de Botones -->
+                <div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
                     <!-- Botones compactos -->
-                     <button id="btn-sol-limpieza" class="w-full flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-transparent hover:border-cyan-500/30 transition-all group" onclick="applyRestoration('limpieza')">
-                        <span class="material-symbols-outlined text-slate-400 group-hover:text-cyan-400 group-hover:animate-bounce">cleaning_services</span>
-                        <div class="text-left">
-                            <div class="text-sm font-semibold text-slate-200 group-hover:text-white">Limpieza</div>
-                        </div>
+                     <button id="btn-sol-limpieza" class="flex flex-col items-center justify-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-transparent hover:border-cyan-500/30 transition-all group h-24" onclick="applyRestoration('limpieza')">
+                        <span class="material-symbols-outlined text-3xl text-slate-400 group-hover:text-cyan-400 group-hover:scale-110 transition-transform">cleaning_services</span>
+                        <span class="text-xs font-bold text-slate-300 group-hover:text-white text-center leading-tight">Limpieza</span>
                     </button>
-                    <button id="btn-sol-proteccion" class="w-full flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-transparent hover:border-cyan-500/30 transition-all group" onclick="applyRestoration('proteccion')">
-                        <span class="material-symbols-outlined text-slate-400 group-hover:text-cyan-400 group-hover:animate-bounce">shield</span>
-                        <div class="text-left">
-                            <div class="text-sm font-semibold text-slate-200 group-hover:text-white">Protección</div>
-                        </div>
+                    <button id="btn-sol-proteccion" class="flex flex-col items-center justify-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-transparent hover:border-cyan-500/30 transition-all group h-24" onclick="applyRestoration('proteccion')">
+                        <span class="material-symbols-outlined text-3xl text-slate-400 group-hover:text-cyan-400 group-hover:scale-110 transition-transform">shield</span>
+                        <span class="text-xs font-bold text-slate-300 group-hover:text-white text-center leading-tight">Protección</span>
                     </button>
-                    <button id="btn-sol-sostenible" class="w-full flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-transparent hover:border-cyan-500/30 transition-all group" onclick="applyRestoration('sostenible')">
-                        <span class="material-symbols-outlined text-slate-400 group-hover:text-cyan-400 group-hover:animate-bounce">eco</span>
-                        <div class="text-left">
-                            <div class="text-sm font-semibold text-slate-200 group-hover:text-white">Sostenibilidad</div>
-                        </div>
+                    <button id="btn-sol-sostenible" class="flex flex-col items-center justify-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-transparent hover:border-cyan-500/30 transition-all group h-24" onclick="applyRestoration('sostenible')">
+                        <span class="material-symbols-outlined text-3xl text-slate-400 group-hover:text-cyan-400 group-hover:scale-110 transition-transform">eco</span>
+                        <span class="text-xs font-bold text-slate-300 group-hover:text-white text-center leading-tight">Sostenible</span>
                     </button>
-                    <button id="btn-sol-reforestacion" class="w-full flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-transparent hover:border-cyan-500/30 transition-all group" onclick="applyRestoration('reforestacion')">
-                        <span class="material-symbols-outlined text-slate-400 group-hover:text-cyan-400 group-hover:animate-bounce">forest</span>
-                        <div class="text-left">
-                            <div class="text-sm font-semibold text-slate-200 group-hover:text-white">Filtración</div>
-                        </div>
+                    <button id="btn-sol-reforestacion" class="flex flex-col items-center justify-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-transparent hover:border-cyan-500/30 transition-all group h-24" onclick="applyRestoration('reforestacion')">
+                        <span class="material-symbols-outlined text-3xl text-slate-400 group-hover:text-cyan-400 group-hover:scale-110 transition-transform">forest</span>
+                        <span class="text-xs font-bold text-slate-300 group-hover:text-white text-center leading-tight">Filtración</span>
                     </button>
-                    <button id="btn-sol-regulacion" class="w-full flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-transparent hover:border-cyan-500/30 transition-all group" onclick="applyRestoration('regulacion')">
-                        <span class="material-symbols-outlined text-slate-400 group-hover:text-cyan-400 group-hover:animate-bounce">traffic</span>
-                        <div class="text-left">
-                            <div class="text-sm font-semibold text-slate-200 group-hover:text-white">Regulación</div>
-                        </div>
+                    <button id="btn-sol-regulacion" class="flex flex-col items-center justify-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-transparent hover:border-cyan-500/30 transition-all group h-24" onclick="applyRestoration('regulacion')">
+                        <span class="material-symbols-outlined text-3xl text-slate-400 group-hover:text-cyan-400 group-hover:scale-110 transition-transform">traffic</span>
+                        <span class="text-xs font-bold text-slate-300 group-hover:text-white text-center leading-tight">Regulación</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Footer del Lab (Status) -->
-        <div class="pb-12 text-center pointer-events-auto">
-             <div class="inline-flex items-center gap-4 px-6 py-3 bg-black/40 backdrop-blur-xl rounded-full border border-white/10 shadow-lg">
-                <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Integridad del Sistema:</span>
-                <div class="flex items-center gap-2">
-                    <div id="ocean-health" class="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_10px_#4ade80]"></div>
-                    <span id="ocean-status" class="text-sm font-bold text-green-400">100% ÓPTIMO</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contenedor para las secciones inferiores (Scroll) -->
-    <div class="max-w-7xl mx-auto px-6 pb-20">
+        <!-- Contenedor para las secciones inferiores (Scroll) -->
+        <div class="max-w-7xl mx-auto px-6 pb-20">
             <div id="decision-simulator" class="mt-14 glass-card rounded-[2.5rem] p-4 md:p-10 relative overflow-hidden">
                 <div id="decision-screen-tint" class="absolute inset-0 opacity-0 pointer-events-none transition-all duration-500"></div>
                 <div class="relative z-10">
@@ -390,12 +371,16 @@
 
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
                         <div id="drop-contamina" class="drop-zone min-h-[140px] md:min-h-[180px] bg-red-500/10 border-2 border-dashed border-red-400/50 rounded-3xl p-4 md:p-5">
-                            <h3 class="text-xl font-bold text-red-300 mb-2">🟥 Contamina el océano</h3>
+                            <h3 class="text-xl font-bold text-red-300 mb-2 flex items-center gap-2">
+                                <span class="material-symbols-outlined">dangerous</span> Contamina el océano
+                            </h3>
                             <p class="text-sm text-slate-200 mb-3">Arrastra aquí los elementos que dañan ecosistemas marinos.</p>
                             <div class="drop-items flex flex-wrap gap-3"></div>
                         </div>
                         <div id="drop-protege" class="drop-zone min-h-[140px] md:min-h-[180px] bg-green-500/10 border-2 border-dashed border-green-400/50 rounded-3xl p-4 md:p-5">
-                            <h3 class="text-xl font-bold text-green-300 mb-2">🟢 Protege el océano</h3>
+                            <h3 class="text-xl font-bold text-green-300 mb-2 flex items-center gap-2">
+                                <span class="material-symbols-outlined">health_and_safety</span> Protege el océano
+                            </h3>
                             <p class="text-sm text-slate-200 mb-3">Arrastra aquí los elementos que ayudan a cuidar el mar.</p>
                             <div class="drop-items flex flex-wrap gap-3"></div>
                         </div>
@@ -413,19 +398,18 @@
                     </div>
                 </div>
             </div>
-    </div>
-    </div> <!-- Fin del contenedor de simulación -->
+        </div>
+    </div> <!-- Fin del contenedor de simulación (El filtro se aplica aquí) -->
 
     <!-- CONTENEDOR DE NOTIFICACIONES DE IMPACTO (Feedback Educativo) -->
     <div id="impact-feedback-container" class="fixed top-28 left-1/2 -translate-x-1/2 z-[9990] w-[90%] max-w-2xl pointer-events-none"></div>
 
-    <!-- Botón Flotante de Reinicio (Siempre visible para control total) -->
-    <button id="floating-reset-btn" class="hidden fixed bottom-8 right-8 z-[9999] px-6 py-4 bg-primary text-deep-abyss font-bold rounded-full shadow-[0_0_30px_rgba(56,189,248,0.6)] hover:scale-110 transition-all flex items-center gap-3 border-4 border-white/20" onclick="resetEnvironment()">
+    <!-- Botón Flotante de Reinicio (MOVIDO FUERA DEL CONTENEDOR PARA ARREGLAR POSICIÓN FIXED) -->
+    <button id="floating-reset-btn" class="hidden fixed bottom-24 right-6 md:right-10 z-[9999] px-6 py-4 bg-primary text-deep-abyss font-bold rounded-full shadow-[0_0_30px_rgba(56,189,248,0.6)] hover:scale-110 transition-all items-center gap-3 border-4 border-white/20 cursor-pointer" onclick="window.resetEnvironment()">
         <span class="material-symbols-outlined text-3xl">restart_alt</span> <span class="hidden md:inline text-lg">Reiniciar Escenario</span>
-    </button>
-
+    </button>`r`n
     <!-- Scripts -->
-    <script src="assets/js/interactive.js"></script>
-    <script src="assets/js/laboratorio.js"></script>
+    <script src="../assets/js/interactive.js"></script>
+    <script src="../assets/js/laboratorio.js"></script>
 </body>
 </html>

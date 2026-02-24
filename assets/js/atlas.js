@@ -28,6 +28,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Datos de los marcadores de ecosistemas marinos de Panamá
     const markersData = [
         {
+            coords: [8.19, -82.26],
+            title: "Parque Nacional Marino Golfo de Chiriquí",
+            description: "Protege 14,740 hectáreas de islas, arrecifes de coral y manglares. Es un sitio crucial para la reproducción de ballenas jorobadas y tortugas marinas.",
+            category: "arrecife",
+            risk: "Medio",
+            cause: "Pesca no selectiva (trasmallos), contaminación por escorrentía agrícola y potencial desarrollo portuario.",
+            image: "https://es.tourismpanama.com"
+        },
+        {
             coords: [9.34, -82.25],
             title: 'Archipiélago de Bocas del Toro',
             description: 'Hogar del 95% de las especies de coral del Caribe panameño. Zona de alta biodiversidad.',
@@ -116,6 +125,8 @@ document.addEventListener('DOMContentLoaded', function() {
             risk: 'Bajo',
             cause: 'Pesca industrial ilegal en zonas limítrofes (IUU).',
             image: 'https://imgs.mongabay.com/wp-content/uploads/sites/25/2020/09/09225911/Planeta-Vivo-2020-Foto-Antonio-Busiello-WWF-US-768x512.jpg'
+
+            
         }
     ];
 

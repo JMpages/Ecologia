@@ -257,7 +257,7 @@ function animate() {
     
     if (activeCount > 0) {
         // Temblor acumulativo: Más problemas = Más caos y mareo
-        let shakeIntensity = 0.03 * activeCount; 
+        let shakeIntensity = 0.08 * activeCount; // AUMENTADO: Temblor mucho más fuerte
         if (pollutionState.noise) shakeIntensity += 0.15; // Ruido añade vibración extra
         
         // Movimiento de cámara "borracho" o inestable
@@ -316,44 +316,44 @@ const actionMessages = {
     // Negativos
     basura: {
         title: "Asfixia por Plástico",
-        text: "Los residuos bloquean la luz solar necesaria para el fitoplancton y son ingeridos por peces, causando muerte por obstrucción digestiva."
+        text: "El plástico bloquea la luz y asfixia a la fauna al ser ingerido."
     },
     reciclaje: { // Mapeado a blanqueamiento
         title: "Estrés Térmico",
-        text: "El aumento de temperatura expulsa a las algas simbióticas (zooxantelas) de los corales, dejándolos blancos y vulnerables a enfermedades."
+        text: "El calor expulsa algas vitales, blanqueando y matando corales."
     },
     pesca: {
         title: "Colapso Trófico",
-        text: "La extracción excesiva rompe la cadena alimenticia. Sin depredadores o presas clave, el equilibrio del ecosistema se desmorona."
+        text: "La sobrepesca rompe la cadena alimenticia y desequilibra el mar."
     },
     petroleo: {
         title: "Toxicidad Química",
-        text: "La capa de petróleo impide el intercambio de oxígeno en la superficie y se adhiere a las branquias y plumas, asfixiando a la fauna."
+        text: "El petróleo bloquea el oxígeno y asfixia a la fauna marina."
     },
     ruido: {
         title: "Desorientación Acústica",
-        text: "El ruido de motores interfiere con la ecolocalización de cetáceos y peces, causándoles estrés crónico y pérdida de rumbo."
+        text: "El ruido de motores desorienta y estresa a peces y cetáceos."
     },
     // Positivos
     limpieza: {
         title: "Recuperación de Hábitat",
-        text: "Retirar residuos permite que la luz solar llegue al fondo marino, reactivando la fotosíntesis y la vida en el arrecife."
+        text: "Retirar basura reactiva la luz y la vida en el arrecife."
     },
     proteccion: {
         title: "Regeneración Natural",
-        text: "Las zonas protegidas permiten que los corales se recuperen del estrés sin intervención humana directa."
+        text: "Zonas protegidas permiten a los corales sanar sin estrés."
     },
     sostenible: {
         title: "Equilibrio Poblacional",
-        text: "Respetar las vedas permite que las especies juveniles lleguen a la edad adulta y se reproduzcan."
+        text: "Respetar vedas permite a las especies reproducirse y repoblar."
     },
     reforestacion: {
         title: "Filtración Biológica",
-        text: "La limpieza de vertidos y la restauración de manglares filtran toxinas y mejoran la calidad del agua."
+        text: "Restaurar manglares filtra toxinas y limpia el agua naturalmente."
     },
     regulacion: {
         title: "Silencio Submarino",
-        text: "Reducir la velocidad de navegación disminuye la contaminación acústica, permitiendo que las especies se comuniquen de nuevo."
+        text: "Menos ruido permite a las especies comunicarse y orientarse."
     }
 };
 
@@ -383,6 +383,16 @@ function updateEnvironmentVisuals() {
     const { trash, bleaching, fishing, oil, noise } = pollutionState;
     const activeCount = Object.values(pollutionState).filter(Boolean).length;
 
+    // 0.5. ASEGURAR QUE EL BOTÓN DE REINICIO EXISTA (Si no está en el HTML)
+    if (!document.getElementById('floating-reset-btn')) {
+        const btn = document.createElement('button');
+        btn.id = 'floating-reset-btn';
+        btn.className = 'hidden fixed bottom-24 right-10 z-[9999] px-6 py-4 bg-primary text-deep-abyss font-bold rounded-full shadow-[0_0_30px_rgba(56,189,248,0.6)] hover:scale-110 transition-all items-center gap-3 border-4 border-white/20';
+        btn.innerHTML = '<span class="material-symbols-outlined text-3xl">restart_alt</span> <span class="hidden md:inline text-lg">Reiniciar Escenario</span>';
+        btn.onclick = window.resetEnvironment;
+        document.body.appendChild(btn);
+    }
+
     // --- 1. EFECTOS DOM (Graduales) ---
     const simContainer = document.getElementById('simulation-container') || document.body;
     const nav = document.querySelector('nav');
@@ -404,7 +414,7 @@ function updateEnvironmentVisuals() {
     if (noise) filters.push('blur(1px) contrast(1.2)'); // Vibración visual
 
     // Filtro acumulativo (Desenfoque aumenta con cada problema)
-    // if (activeCount > 0) filters.push(`blur(${activeCount * 0.5}px)`); // Reducido para no marear tanto
+    if (activeCount > 0) filters.push(`blur(${activeCount * 0.3}px)`); // REDUCIDO: Blur más suave y gradual
 
     simContainer.style.transition = "filter 2s ease";
     simContainer.style.filter = filters.length > 0 ? filters.join(' ') : 'none';
@@ -426,19 +436,38 @@ function updateEnvironmentVisuals() {
         else overlay.classList.remove('animate-pulse');
     }
 
-    // CONTROL DEL BOTÓN DE REINICIO
-    if (resetBtn) {
+    // CONTROL DEL BOTÓN DE REINICIO (Lógica Robusta)
+    let finalResetBtn = document.getElementById('floating-reset-btn');
+    
+    // CORRECCIÓN CRÍTICA: Si el botón está dentro del contenedor con filtro, moverlo al body
+    if (finalResetBtn && finalResetBtn.parentElement !== document.body) {
+        document.body.appendChild(finalResetBtn);
+    }
+
+    // PROTECCIÓN DE NOTIFICACIONES: Mover al body para evitar filtros de destrucción
+    const feedbackContainer = document.getElementById('impact-feedback-container');
+    if (feedbackContainer && feedbackContainer.parentElement !== document.body) {
+        document.body.appendChild(feedbackContainer);
+    }
+
+    // Asegurar estilos y eventos siempre
+    if (finalResetBtn) {
+        finalResetBtn.className = 'hidden fixed bottom-24 right-6 md:right-10 z-[9999] px-6 py-4 bg-primary text-deep-abyss font-bold rounded-full shadow-[0_0_30px_rgba(56,189,248,0.6)] hover:scale-110 transition-all items-center gap-3 border-4 border-white/20 cursor-pointer';
+        // Forzar el evento onclick directamente
+        finalResetBtn.onclick = function() { window.resetEnvironment(); };
+
         if (activeCount > 0) {
-            resetBtn.classList.remove('hidden');
-            resetBtn.classList.add('flex');
+            finalResetBtn.classList.remove('hidden');
+            finalResetBtn.classList.add('flex');
         } else {
-            resetBtn.classList.add('hidden');
-            resetBtn.classList.remove('flex');
+            finalResetBtn.classList.add('hidden');
+            finalResetBtn.classList.remove('flex');
         }
     }
     
     // Navbar se mantiene fija (Corrección solicitada)
     if(nav) {
+        // Mantener posición central original, la destrucción será interna en los links
         nav.style.transform = "translate(-50%, 0)";
         nav.style.opacity = "1";
     }
@@ -451,13 +480,17 @@ function updateEnvironmentVisuals() {
             if(container.classList.contains('animate-float')) container.classList.remove('animate-float'); // Detener flotación suave
             
             // Caos progresivo: Rotación, Skew y Desplazamiento
-            const chaos = activeCount * 1.5; // Intensidad ajustada
-            const rot = (Math.random() - 0.5) * chaos * 0.5;
+            const chaos = activeCount * 1.5; // REDUCIDO: Para que no se rompa tanto
+            const rot = (Math.random() - 0.5) * chaos * 0.5; 
             const skew = (Math.random() - 0.5) * chaos * 0.5;
-            const scale = 1 - (chaos * 0.01);
+            const scale = 1 - (chaos * 0.01); 
             
+            // Añadir desplazamiento aleatorio para "desencajar" la web
+            const x = (Math.random() - 0.5) * chaos;
+            const y = (Math.random() - 0.5) * chaos;
+
             container.style.transition = "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-            container.style.transform = `rotate(${rot}deg) skewX(${skew}deg) scale(${scale})`;
+            container.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg) skewX(${skew}deg) scale(${scale})`;
         } else {
             if(container === mainContainer) container.classList.add('animate-float');
             container.style.transform = "";
@@ -466,24 +499,28 @@ function updateEnvironmentVisuals() {
 
     // --- EFECTO DE RUPTURA LITERAL (Separación de elementos) ---
     
-    // 1. Romper la Navbar (Separar Logo y Menú)
-    if (navLogo && navMenu) {
+    // 1. Romper la Navbar (Mover cada link individualmente)
+    const navLinks = document.querySelectorAll('nav a');
+    if (navLinks.length > 0) {
         if (activeCount > 0) {
-            // Se separan hacia los lados opuestos
-            const separation = activeCount * 10; // px (Reducido de 50)
-            const rotation = activeCount * 1; // deg (Reducido de 5)
-            
-            navLogo.style.transition = "transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55)";
-            navMenu.style.transition = "transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55)";
-            
-            navLogo.style.transform = `translateX(-${separation}px) rotate(-${rotation}deg)`;
-            navMenu.style.transform = `translateX(${separation}px) rotate(${rotation}deg)`;
+            navLinks.forEach((link) => {
+                // Caos individual para cada enlace
+                const chaos = activeCount * 3;
+                const x = (Math.random() - 0.5) * chaos;
+                const y = (Math.random() - 0.5) * chaos;
+                const rot = (Math.random() - 0.5) * chaos * 2;
+                
+                link.style.display = 'inline-block'; // Asegurar que transform funcione
+                link.style.transition = "transform 0.5s ease";
+                link.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
+            });
             
             // El contenedor de la nav se agrieta (borde rojo)
             if(nav) nav.querySelector('div').style.borderColor = `rgba(255, 50, 50, ${activeCount * 0.2})`;
         } else {
-            navLogo.style.transform = "none";
-            navMenu.style.transform = "none";
+            navLinks.forEach(link => {
+                link.style.transform = "none";
+            });
             if(nav) nav.querySelector('div').style.borderColor = "rgba(255, 255, 255, 0.2)";
         }
     }
@@ -492,9 +529,9 @@ function updateEnvironmentVisuals() {
     if (negativeCard && restorationCard) {
         if (activeCount > 0) {
             // Tarjeta negativa se cae a la izquierda
-            const negRot = -0.5 * activeCount; // Reducido
-            const negX = -5 * activeCount; // Reducido drásticamente
-            const negY = 2 * activeCount; // Reducido
+            const negRot = -0.5 * activeCount; // REDUCIDO
+            const negX = -5 * activeCount; // REDUCIDO: Se aleja menos
+            const negY = 2 * activeCount; // Cae menos
             
             negativeCard.style.transition = "transform 0.5s ease";
             negativeCard.style.transform = `translate(${negX}px, ${negY}px) rotate(${negRot}deg)`;
@@ -505,8 +542,8 @@ function updateEnvironmentVisuals() {
             negButtons.forEach((btn, idx) => {
                 if (activeCount >= 3) {
                     // Aleatoriedad determinista basada en índice
-                    const randR = (idx % 2 === 0 ? 1 : -1) * (activeCount * 2);
-                    const randY = activeCount * 3;
+                    const randR = (idx % 2 === 0 ? 1 : -1) * (activeCount * 2); // REDUCIDO
+                    const randY = activeCount * 2;
                     btn.style.transform = `translateY(${randY}px) rotate(${randR}deg)`;
                     btn.style.opacity = 0.8;
                 } else {
@@ -525,16 +562,16 @@ function updateEnvironmentVisuals() {
     // RESALTAR TARJETA DE RESTAURACIÓN (La solución)
     if (restorationCard) {
         if (activeCount > 0) {
-            // Estilo de "Salvación"
+            // Estilo de "Salvación" - ESTABILIDAD VISUAL
             restorationCard.classList.remove('border-white/10', 'bg-deep-abyss/50');
             restorationCard.classList.add('border-green-400', 'bg-deep-abyss/90', 'shadow-[0_0_40px_rgba(74,222,128,0.4)]', 'z-30', 'relative');
             
             if (activeCount >= 3) {
-                // Estado crítico: Se separa a la derecha para salvarse del derrumbe
+                // Estado crítico: Resaltar mucho pero mantener estable para facilitar el clic
                 restorationCard.classList.add('animate-pulse', 'ring-4', 'ring-green-500', 'shadow-[0_0_80px_rgba(74,222,128,0.8)]');
-                restorationCard.style.transform = `translate(${activeCount * 5}px, -5px) scale(1.02) rotate(1deg)`;
+                restorationCard.style.transform = `scale(1.05)`; // Solo escala, sin desplazamiento ni rotación
             } else {
-                restorationCard.style.transform = `translate(${activeCount * 2}px, 0) scale(1.01)`;
+                restorationCard.style.transform = `scale(1.02)`;
             }
         } else {
             // Restaurar estado normal
@@ -747,7 +784,7 @@ function showActionFeedback(type, isNegative) {
                             <span class="text-[10px] font-black tracking-widest uppercase text-cyan-300 bg-cyan-400/10 px-2 py-0.5 rounded border border-cyan-400/20 shadow-[0_0_10px_rgba(34,211,238,0.2)]">Restauración Exitosa</span>
                         </div>
                         <h4 class="font-bold text-xl text-white mb-1 tracking-tight">${data.title}</h4>
-                        <p class="text-sm text-slate-300 leading-relaxed font-light">${data.text}</p>
+                        <p class="text-sm text-white leading-relaxed font-medium">${data.text}</p>
                     </div>
                 </div>
             </div>`;
