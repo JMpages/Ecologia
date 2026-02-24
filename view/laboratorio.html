@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/img/logo.png" type="image/png">
-    <title>Laboratorio Interactivo</title>
+    <title>Impacto Interactivo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../assets/js/tailwind-config.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -58,7 +58,7 @@
             </a>
             <div class="hidden md:flex items-center bg-white/5 rounded-full px-1 py-1 border border-white/5">
                 <a href="laboratorio.html" class="nav-flash active-nav flex items-center gap-2 px-4 py-3 text-sm font-medium text-slate-300 hover:text-white transition-all rounded-full">
-                    <span class="material-symbols-outlined text-lg">science</span> Laboratorio
+                    <span class="material-symbols-outlined text-lg">warning</span> Impacto
                 </a>
                 <a href="atlas.html" class="nav-flash flex items-center gap-2 px-4 py-3 text-sm font-medium text-slate-300 hover:text-white transition-all rounded-full">
                     <span class="material-symbols-outlined text-lg">analytics</span> Atlas
@@ -84,7 +84,7 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden mt-2 bg-blue-900/90 backdrop-blur-xl border-2 border-white/20 rounded-3xl p-4 flex flex-col gap-2 shadow-2xl">
             <a href="laboratorio.html" class="nav-flash active-nav flex items-center gap-3 text-slate-300 hover:text-white px-4 py-3 rounded-xl transition-all text-sm font-medium">
-                <span class="material-symbols-outlined">science</span> Laboratorio
+                <span class="material-symbols-outlined">warning</span> Impacto
             </a>
             <a href="atlas.html" class="nav-flash flex items-center gap-3 text-slate-300 hover:text-white px-4 py-3 rounded-xl transition-all text-sm font-medium">
                 <span class="material-symbols-outlined">analytics</span> Atlas
@@ -107,13 +107,75 @@
     <!-- LABORATORIO INTERACTIVO INMERSIVO (HUD LAYOUT) -->
     <div id="hud-container" class="relative z-10 w-full min-h-screen flex flex-col pointer-events-none">
         
+        <!-- Intro de Impacto -->
+        <section class="pointer-events-auto max-w-7xl mx-auto px-6 mt-28 md:mt-32 mb-14 overflow-x-clip">
+            <div class="relative overflow-hidden rounded-[2.2rem] border border-white/15 bg-gradient-to-br from-slate-950/80 via-blue-950/75 to-slate-900/85 p-6 md:p-10 shadow-[0_0_80px_rgba(34,211,238,0.18)] max-w-5xl mx-auto w-full">
+                <div class="absolute -top-20 -right-16 w-56 h-56 rounded-full bg-cyan-300/20 blur-3xl"></div>
+                <div class="absolute -bottom-20 -left-16 w-56 h-56 rounded-full bg-red-400/15 blur-3xl"></div>
+
+                <div class="relative z-10">
+                    <div class="max-w-4xl">
+                        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/30 border border-white/15 text-xs uppercase tracking-[0.2em] font-bold text-cyan-200">
+                            <span class="material-symbols-outlined text-base">public</span>
+                            Panama: Ecosistemas en riesgo
+                        </span>
+                        <h2 class="mt-4 text-3xl md:text-5xl font-black tracking-tight text-white leading-tight">
+                            La contaminacion marina ya esta alterando
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-red-300"> arrecifes, manglares y costas</span>
+                        </h2>
+                        <p class="mt-4 text-slate-100/90 text-base md:text-lg leading-relaxed max-w-3xl">
+                            En Panama, los residuos plasticos, los derrames, el calentamiento del mar y la presion humana reducen la biodiversidad, debilitan la pesca y aumentan la vulnerabilidad de comunidades costeras.
+                            Esta simulacion resume los impactos mas criticos para que puedas ver causa, efecto y soluciones en tiempo real.
+                        </p>
+                        <p class="mt-3 text-slate-200/90 text-sm md:text-base leading-relaxed max-w-3xl">
+                            Lo mas urgente es cortar la entrada de basura al mar, proteger habitats clave y fortalecer practicas sostenibles en zonas costeras. Cada decision local puede mejorar o agravar el equilibrio del ecosistema.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="pointer-events-auto max-w-7xl mx-auto px-6 mb-14">
+            <div class="max-w-5xl mx-auto">
+                <h3 class="text-xl md:text-2xl font-black text-white tracking-tight mb-4">Como los afecta</h3>
+                <div class="grid md:grid-cols-3 gap-3">
+                    <article class="rounded-2xl border border-red-300/30 bg-red-500/10 p-4">
+                        <p class="text-xs uppercase tracking-widest text-red-200 font-bold">Arrecifes</p>
+                        <p class="text-sm text-slate-100 mt-2">Impacto principal: blanqueamiento y perdida de habitat.</p>
+                        <ul class="text-sm text-slate-200/90 space-y-1 list-disc pl-4 mt-2">
+                            <li>Menos refugio para peces juveniles.</li>
+                            <li>Caida de biodiversidad local.</li>
+                            <li>Alteracion de la cadena trofica.</li>
+                        </ul>
+                    </article>
+                    <article class="rounded-2xl border border-emerald-300/30 bg-emerald-500/10 p-4">
+                        <p class="text-xs uppercase tracking-widest text-emerald-200 font-bold">Manglares</p>
+                        <p class="text-sm text-slate-100 mt-2">Impacto principal: menor proteccion natural de la costa.</p>
+                        <ul class="text-sm text-slate-200/90 space-y-1 list-disc pl-4 mt-2">
+                            <li>Mas erosion y vulnerabilidad costera.</li>
+                            <li>Menor filtracion de contaminantes.</li>
+                            <li>Perdida de zonas de cria marina.</li>
+                        </ul>
+                    </article>
+                    <article class="rounded-2xl border border-cyan-300/30 bg-cyan-500/10 p-4">
+                        <p class="text-xs uppercase tracking-widest text-cyan-200 font-bold">Comunidad</p>
+                        <p class="text-sm text-slate-100 mt-2">Impacto principal: afectacion economica y social directa.</p>
+                        <ul class="text-sm text-slate-200/90 space-y-1 list-disc pl-4 mt-2">
+                            <li>Menor pesca artesanal y turismo.</li>
+                            <li>Mayor costo de limpieza de playas.</li>
+                            <li>Riesgo para ingresos familiares costeros.</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
         <!-- Header del Lab (Título) -->
-        <div class="pt-24 pb-4 text-center pointer-events-auto">
+        <div class="pt-1 pb-4 text-center pointer-events-auto">
             <span class="text-primary font-bold tracking-[0.3em] uppercase text-xs shadow-black drop-shadow-md">Panel de Control Ambiental</span>
             <h1 class="text-4xl md:text-6xl lg:text-8xl leading-[1.15] px-4 pb-2 font-black tracking-tighter text-white drop-shadow-xl mt-5 mb-6">¿QUÉ PASARÍA <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-300 inline-block pr-3">SI...?</span></h1>
             <p class="text-slate-200 mt-3 max-w-2xl mx-auto text-xl leading-relaxed">Usa los botones de la mesa de control para experimentar. Activa una amenaza y observa el impacto, luego aplica una solución para restaurar el océano.</p>
         </div>
-
         <!-- Espacio flexible para empujar controles abajo -->
         <div class="flex-1 min-h-[250px]"></div>
 

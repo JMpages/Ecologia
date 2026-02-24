@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             coords: [9.40, -79.86],
             title: 'Punta Galeta (Colón)',
-            description: 'Laboratorio natural de manglares y arrecifes del Caribe.',
+            description: 'Impacto natural de manglares y arrecifes del Caribe.',
             category: 'manglar',
             risk: 'Alto',
             cause: 'Expansión portuaria y riesgo de derrames de petróleo.',
