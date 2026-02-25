@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             description: "Protege 14,740 hectáreas de islas, arrecifes de coral y manglares. Es un sitio crucial para la reproducción de ballenas jorobadas y tortugas marinas.",
             category: "arrecife",
             risk: "Medio",
-            cause: "Pesca no selectiva (trasmallos), contaminación por escorrentía agrícola y potencial desarrollo portuario.",
+            cause: "Contaminación por escorrentía agrícola y desechos plásticos traídos por corrientes marinas.",
             image: "https://es.tourismpanama.com"
         },
         {
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
             description: 'Hogar del 95% de las especies de coral del Caribe panameño. Zona de alta biodiversidad.',
             category: 'arrecife',
             risk: 'Alto',
-            cause: 'Turismo masivo no regulado, sedimentación y aguas residuales.',
+            cause: 'Descarga de aguas residuales sin tratamiento y acumulación de basura generada por el turismo.',
             image: 'https://sanblascatamaran.com/wp-content/uploads/2024/04/Bocas-del-Toro-sailing.webp'
         },
         {
@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'Comarca Guna Yala',
             description: 'Extenso sistema arrecifal gestionado por la comunidad Guna. Barrera natural crítica.',
             category: 'arrecife',
-            risk: 'Medio',
-            cause: 'Aumento del nivel del mar y blanqueamiento de corales.',
+            risk: 'Alto',
+            cause: 'Acumulación masiva de plástico oceánico arrastrado por los vientos alisios y falta de gestión de residuos.',
             image: 'https://lh3.googleusercontent.com/gps-cs-s/AHVAweq_OL22mWgXoJr09Dg-uGtwlxAiltyrj3zaQIgFOqQHXuMZ5mCGJnc6iC1c-xZrMkzfGG-CY_loSlzTSZe4mfTpp_p2V4SDAP2-8d4LjmNvQrfUvltEkfrKxhUd1Py7dPNt0gI5tQ=w408-h725-k-no'
         },
         {
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             description: 'Patrimonio de la Humanidad (UNESCO). Vital para la migración de especies pelágicas.',
             category: 'arrecife',
             risk: 'Bajo',
-            cause: 'Pesca ilegal esporádica y presión climática global.',
+            cause: 'Redes fantasma abandonadas y basura marina que llega desde el continente por las corrientes.',
             image: 'https://coiba.gob.pa/wp-content/uploads/2018/10/coiba_noticia_12_oct_2018_00.jpg'
         },
         {
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
             description: 'Sitio Ramsar crítico para aves migratorias, adyacente a la ciudad.',
             category: 'impacto',
             risk: 'Crítico',
-            cause: 'Desarrollo urbano descontrolado y contaminación directa.',
+            cause: 'Descarga directa de basura urbana y plásticos a través de los ríos de la ciudad (Juan Díaz, Matasnillo).',
             image: 'https://static.tvn-2.com/clip/6a9af1e0-80f2-4422-97eb-4074a0053341_16-9-aspect-ratio_default_0.webp'
         },
         {
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
             description: 'Estuario más grande de Panamá, con extensos manglares.',
             category: 'manglar',
             risk: 'Medio',
-            cause: 'Tala ilegal de mangle y sedimentación agrícola.',
+            cause: 'Sedimentos contaminados por agroquímicos y residuos sólidos arrastrados por el río Tuira.',
             image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEJQWqYeXm9kdcmtRj4QmWO41eklxIfxQe6Q&s'
         },
         {
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             description: 'Zona de afloramiento rica en nutrientes. Importante para la pesca artesanal, turismo y avistamiento de cetáceos.',
             category: 'pesca',
             risk: 'Medio',
-            cause: 'Sobrepesca artesanal y desarrollo turístico en islas.',
+            cause: 'Residuos plásticos en playas de anidación y contaminación por tráfico de embarcaciones de recreo.',
             image: 'https://www.emprendedorestrella.com/content/20170613115225-1.jpg'
         },
         {
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
             description: 'Humedal de Importancia Internacional (Ramsar).',
             category: 'manglar',
             risk: 'Alto',
-            cause: 'Actividad agrícola intensiva y uso de agroquímicos.',
+            cause: 'Escorrentía de agroquímicos provenientes de cultivos de arroz que afectan la calidad del agua.',
             image: 'https://www.pacificadvent.com/wp-content/uploads/Eduardo-Estrada-Racheria-Island-01-scaled.jpg.webp'
         },
         {
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
             description: 'Refugio de vida silvestre con importantes arrecifes coralinos.',
             category: 'arrecife',
             risk: 'Alto',
-            cause: 'Blanqueamiento por El Niño y turismo de alto impacto.',
+            cause: 'Residuos sólidos dejados por visitantes y contaminación por combustibles de lanchas turísticas.',
             image: 'https://milpolleras.com/wp-content/uploads/2023/11/isla-iguana.jpg'
         },
         {
@@ -113,8 +113,8 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'Punta Galeta (Colón)',
             description: 'Impacto natural de manglares y arrecifes del Caribe.',
             category: 'manglar',
-            risk: 'Alto',
-            cause: 'Expansión portuaria y riesgo de derrames de petróleo.',
+            risk: 'Crítico',
+            cause: 'Derrames de hidrocarburos, residuos portuarios y basura urbana de la ciudad de Colón.',
             image: 'https://pbs.twimg.com/media/D2CpHGYXQAAe7oE.jpg'
         },
         {
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             description: 'Área Marina Protegida de gran extensión en el Pacífico.',
             category: 'pesca',
             risk: 'Bajo',
-            cause: 'Pesca industrial ilegal en zonas limítrofes (IUU).',
+            cause: 'Contaminación por aparejos de pesca abandonados (redes fantasma) y microplásticos en la columna de agua.',
             image: 'https://imgs.mongabay.com/wp-content/uploads/sites/25/2020/09/09225911/Planeta-Vivo-2020-Foto-Antonio-Busiello-WWF-US-768x512.jpg'
 
             
@@ -146,12 +146,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Detectar móvil para ajustar zoom inicial
     const isMobile = window.innerWidth < 1024;
+    const initialCenter = [8.5, -80.0];
+    const initialZoom = isMobile ? 6 : 7;
+
     // Inicializar el mapa
     const map = L.map('panama-map', {
-        center: [8.5, -80.0],
-        zoom: isMobile ? 6 : 7,
+        center: initialCenter,
+        zoom: initialZoom,
         layers: [baseLayers.Estándar], // Capa por defecto: Mapa Estándar
         attributionControl: false // Ocultar texto de atribución (Copyright)
+    });
+
+    // Restaurar vista inicial al cerrar cualquier popup
+    map.on('popupclose', () => {
+        map.flyTo(initialCenter, initialZoom, {
+            animate: true,
+            duration: 1.5
+        });
     });
 
     // --- 3. CREACIÓN DE MARCADORES Y CAPAS ---
@@ -225,7 +236,19 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
 
-        marker.bindPopup(popupContent, { maxWidth: 260 });
+        marker.bindPopup(popupContent, { 
+            maxWidth: 260,
+            autoPan: false // Desactivar autoPan para evitar conflicto con la animación
+        });
+
+        // Centrar el mapa suavemente al hacer clic en el marcador
+        marker.on('click', () => {
+            map.flyTo(markerInfo.coords, 10, {
+                animate: true,
+                duration: 1.5
+            });
+            marker.openPopup(); // Forzar apertura del popup para asegurar visibilidad
+        });
         
         // Añadir marcador al grupo de capa correspondiente
         marker.addTo(layerGroups[categoryKey]);
@@ -382,100 +405,6 @@ document.addEventListener('DOMContentLoaded', function() {
         map.fitBounds(markerBounds, { padding: padding });
     }
 
-    // Gráfico de Estadísticas de Panamá
-    const panamaStatsCtx = document.getElementById('panamaStats').getContext('2d');
-    
-    // Configuración de ejes dinámica (se invierte si es móvil)
-    const valueAxisConfig = {
-        beginAtZero: true,
-        suggestedMax: 1600,
-        ticks: {
-            color: '#e2e8f0',
-            font: { size: isMobile ? 10 : 12, weight: '600' },
-            callback: function(value) {
-                return Number(value).toLocaleString();
-            }
-        },
-        grid: { color: 'rgba(148, 163, 184, 0.2)' }
-    };
-    
-    const categoryAxisConfig = {
-        ticks: {
-            color: '#e2e8f0',
-            font: { size: isMobile ? 10 : 12, weight: '600' }
-        },
-        grid: { color: 'rgba(148, 163, 184, 0.1)' }
-    };
-
-    new Chart(panamaStatsCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Arrecifes (km²)', 'Manglares (miles ha)', 'Peces Marinos (spp)', 'Protección Marina (%)'],
-            datasets: [{
-                label: 'Datos Oficiales',
-                data: [808, 177, 1500, 54.3], // Datos aprox: 770+38 km2 arrecifes, 177k ha manglares, 1500 spp peces, 54.3% protección
-                backgroundColor: ['#fb7185', '#10b981', '#38bdf8', '#f59e0b'],
-                borderColor: '#0f172a',
-                borderWidth: 1,
-                borderRadius: 4,
-                barPercentage: 0.7
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false, // Permite que el CSS controle la altura
-            indexAxis: isMobile ? 'y' : 'x', // Barras horizontales en móvil para leer mejor
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                    titleColor: '#fff',
-                    bodyColor: '#cbd5e1',
-                    borderColor: 'rgba(255,255,255,0.1)',
-                    borderWidth: 1,
-                    padding: 10,
-                    cornerRadius: 8
-                }
-            },
-            scales: {
-                x: isMobile ? valueAxisConfig : categoryAxisConfig,
-                y: isMobile ? categoryAxisConfig : valueAxisConfig
-            }
-        }
-    });
-
-    // Gráfico de Áreas Protegidas
-    const protectedAreasCtx = document.getElementById('protectedAreas').getContext('2d');
-    new Chart(protectedAreasCtx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Océano Protegido (54.3%)', 'Sin Protección (45.7%)'],
-            datasets: [{
-                data: [54.3, 45.7],
-                backgroundColor: ['#10b981', '#334155'],
-                borderColor: '#0f172a',
-                borderWidth: 2,
-                hoverOffset: 4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false, // Permite que el CSS controle la altura
-            cutout: '70%', // Dona más fina y elegante
-            plugins: {
-                legend: {
-                    position: 'bottom', // Siempre abajo para ahorrar espacio horizontal
-                    labels: {
-                        color: '#e2e8f0',
-                        font: { size: 12, weight: '600' },
-                        padding: 20,
-                        usePointStyle: true
-                    }
-                }
-            }
-        }
-    });
-
     // Sección interactiva: Datos curiosos
     const curiosityGrid = document.querySelector('.curiosity-grid');
     const curiosityButtons = document.querySelectorAll('.curiosity-btn');
@@ -553,125 +482,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 button.classList.add('bg-white/5');
             }
         });
-    }
-
-    // Sección interactiva: Ejemplos visuales
-    const visualFilterButtons = document.querySelectorAll('.visual-filter-btn');
-    const visualCarousel = document.getElementById('visual-carousel');
-    const visualPrev = document.getElementById('visual-prev');
-    const visualNext = document.getElementById('visual-next');
-
-    // Intercala tarjetas de contaminación y saludables en el orden visual.
-    if (visualCarousel) {
-        const contaminationCards = Array.from(visualCarousel.querySelectorAll('.visual-card[data-group="contaminacion"]'));
-        const healthyCards = Array.from(visualCarousel.querySelectorAll('.visual-card[data-group="saludable"]'));
-        const maxLength = Math.max(contaminationCards.length, healthyCards.length);
-
-        for (let i = 0; i < maxLength; i++) {
-            if (contaminationCards[i]) visualCarousel.appendChild(contaminationCards[i]);
-            if (healthyCards[i]) visualCarousel.appendChild(healthyCards[i]);
-        }
-    }
-    
-    // Clonar elementos para efecto infinito
-    if (visualCarousel) {
-        const originalCards = Array.from(visualCarousel.children);
-        originalCards.forEach(card => {
-            const clone = card.cloneNode(true);
-            clone.setAttribute('aria-hidden', 'true');
-            visualCarousel.appendChild(clone);
-        });
-    }
-
-    visualFilterButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-            const filter = button.dataset.filter;
-
-            visualFilterButtons.forEach((btn) => btn.classList.remove('bg-white/10'));
-            button.classList.add('bg-white/10');
-
-            // Seleccionar todas las tarjetas (incluyendo clones)
-            const allCards = visualCarousel.querySelectorAll('.visual-card');
-            allCards.forEach((card) => {
-                const group = card.dataset.group;
-                const show = filter === 'todos' || filter === group;
-                card.classList.toggle('hidden', !show);
-            });
-            
-            // Resetear scroll al filtrar para evitar espacios vacíos
-            visualCarousel.scrollLeft = 0;
-        });
-    });
-
-    if (visualCarousel && visualPrev && visualNext) {
-        const scrollStep = 420;
-
-        // Función auxiliar para mover con flechas
-        const handleArrowClick = (direction) => {
-            // 1. Pausar auto-scroll temporalmente
-            if (visualCarousel.dataset.isAutoScrolling !== 'false') {
-                visualCarousel.dataset.tempPause = 'true';
-            }
-            
-            // 2. Usar scroll suave para las flechas
-            visualCarousel.style.scrollBehavior = 'smooth';
-            visualCarousel.scrollBy({ left: direction * scrollStep, behavior: 'smooth' });
-
-            // 3. Restaurar comportamiento después de la animación (aprox 500ms)
-            setTimeout(() => {
-                visualCarousel.dataset.tempPause = 'false';
-                visualCarousel.style.scrollBehavior = 'auto'; // Volver a auto para el loop infinito
-            }, 500);
-        };
-
-        visualPrev.addEventListener('click', () => {
-            handleArrowClick(-1);
-        });
-
-        visualNext.addEventListener('click', () => {
-            handleArrowClick(1);
-        });
-    }
-
-    // Funcionalidad de Scroll Infinito + Arrastre
-    if (visualCarousel) {
-        let isAutoScrolling = true;
-        const speed = 0.5; // Velocidad media constante
-
-        // Asegurar que el comportamiento por defecto sea instantáneo para evitar conflictos
-        visualCarousel.style.scrollBehavior = 'auto';
-
-        // Bucle de animación infinita
-        function animateCarousel() {
-            // Solo mover automáticamente si no estamos interactuando y no hay pausa temporal
-            if (isAutoScrolling && visualCarousel.dataset.tempPause !== 'true') {
-                visualCarousel.scrollLeft += speed;
-            }
-
-            // Reset infinito: Si llegamos a la mitad (final del set original), volvemos al inicio
-            // Se ejecuta SIEMPRE para mantener la ilusión de infinito, incluso arrastrando
-            if (visualCarousel.scrollLeft >= (visualCarousel.scrollWidth / 2)) {
-                visualCarousel.scrollLeft = 0;
-            } else if (visualCarousel.scrollLeft <= 0) {
-                // Permitir scroll infinito hacia la izquierda también
-                visualCarousel.scrollLeft = (visualCarousel.scrollWidth / 2) - 1;
-            }
-
-            requestAnimationFrame(animateCarousel);
-        }
-        // Iniciar animación
-        requestAnimationFrame(animateCarousel);
-
-        // Pausar al mantener presionado (PC y Móvil)
-        const pauseScroll = () => { isAutoScrolling = false; };
-        const resumeScroll = () => { isAutoScrolling = true; };
-
-        visualCarousel.addEventListener('mousedown', pauseScroll);
-        visualCarousel.addEventListener('touchstart', pauseScroll, { passive: true });
-
-        visualCarousel.addEventListener('mouseup', resumeScroll);
-        visualCarousel.addEventListener('mouseleave', resumeScroll);
-        visualCarousel.addEventListener('touchend', resumeScroll);
     }
 
     // --- 6. MODAL DE IMAGEN (Lightbox) ---

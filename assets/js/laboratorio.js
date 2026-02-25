@@ -1,12 +1,11 @@
 /**
  * d:\Mis archivos\Proyecto\assets\js\laboratorio.js
- * LÃ³gica 3D para el Laboratorio Interactivo usando Three.js
+ * Lógica 3D para el Laboratorio Interactivo usando Three.js
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     initThreeJS();
     initWhatIfInteraction();
-    initDecisionQuizSimulator();
     initDragDecideSimulator();
     updateButtonUX(); // Inicializar estado de botones
     updateEnvironmentVisuals(); // APLICAR ESTADO VISUAL Y DESTRUCCIÓN AL CARGAR
@@ -31,7 +30,7 @@ function initThreeJS() {
     const canvas = document.getElementById('ocean-canvas');
     if (!canvas) return;
 
-    // --- 1. CONFIGURACIï¿½"N DE LA ESCENA ---
+    // --- 1. CONFIGURACIÓN DE LA ESCENA ---
     scene = new THREE.Scene();
     
     // Colores para los estados
@@ -49,7 +48,7 @@ function initThreeJS() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
 
-    // --- 2. ILUMINACIï¿½"N ---
+    // --- 2. ILUMINACIÓN ---
     ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
 
@@ -63,7 +62,7 @@ function initThreeJS() {
     scene.add(ecosystemGroup);
     scene.add(pollutionGroup);
 
-    // A. PartÃ­culas de Ambiente (Plancton/Burbujas)
+    // A. Partículas de Ambiente (Plancton/Burbujas)
     // Helper para textura suave (Burbujas/Plancton)
     const getSoftTexture = () => {
         const c = document.createElement('canvas');
@@ -129,7 +128,9 @@ function initThreeJS() {
         const mat = new THREE.MeshStandardMaterial({ 
             color: baseColor, 
             roughness: 0.4, 
-            flatShading: true 
+            flatShading: true,
+            emissive: 0x0a1622,
+            emissiveIntensity: 0.12
         });
 
         const body = new THREE.Mesh(bodyGeo, mat);
@@ -152,7 +153,7 @@ function initThreeJS() {
         const s = 0.8 + Math.random() * 0.7;
         fishGroup.scale.set(s, s, s);
 
-        // PosiciÃ³n aleatoria
+        // Posición aleatoria
         fishGroup.position.set((Math.random()-0.5)*35, (Math.random()-0.5)*22, (Math.random()-0.5)*15);
         
         fishGroup.userData = { 
@@ -179,7 +180,7 @@ function initThreeJS() {
         trashItems.push(trash);
     }
 
-    // --- 4. ANIMACIï¿½"N (LOOP) ---
+    // --- 4. ANIMACIÓN (LOOP) ---
     clock = new THREE.Clock();
     animate();
 
@@ -195,28 +196,30 @@ function animate() {
     requestAnimationFrame(animate);
     const time = clock.getElapsedTime();
 
-    // 1. AnimaciÃ³n de Peces (Lógica compleja según estado)
+    // 1. Animación de Peces (Lógica compleja según estado)
     fishes.forEach((fishGroup, index) => {
         const { speed, offset, originalY, material, originalColor } = fishGroup.userData;
 
-        // A. SOBREPESCA: Ocultar el 80% de los peces
-        // Si hay derrame de petróleo, también mueren/desaparecen muchos
-        if ((pollutionState.fishing || pollutionState.oil) && index % 5 !== 0) {
-            fishGroup.visible = false;
-        } else {
-            fishGroup.visible = true;
-        }
-        if (!fishGroup.visible) return;
+        // A. VISIBILIDAD PERMANENTE
+        // Los peces siempre deben ser visibles aunque cambien de estado.
+        fishGroup.visible = true;
 
-        // B. BLANQUEAMIENTO: Color pálido
+        // B. COLOR SEGUN ESTADO (sin perder contraste)
         if (pollutionState.bleaching) {
-            material.color.lerp(new THREE.Color(0xdddddd), 0.05);
+            material.color.lerp(new THREE.Color(0xbfd3e6), 0.05);
+            material.emissive.lerp(new THREE.Color(0x22394f), 0.05);
         } else if (pollutionState.oil) {
-            material.color.lerp(new THREE.Color(0x111111), 0.1); // Negro por petróleo
+            material.color.lerp(new THREE.Color(0x5a4a35), 0.08);
+            material.emissive.lerp(new THREE.Color(0x1f160f), 0.08);
         } else if (pollutionState.trash) {
-            material.color.lerp(new THREE.Color(0x555555), 0.05); // Gris por suciedad
+            material.color.lerp(new THREE.Color(0x607180), 0.05);
+            material.emissive.lerp(new THREE.Color(0x1a2732), 0.05);
+        } else if (pollutionState.fishing) {
+            material.color.lerp(new THREE.Color(0x7ea3c4), 0.04);
+            material.emissive.lerp(new THREE.Color(0x1d3142), 0.04);
         } else {
             material.color.lerp(originalColor, 0.05);
+            material.emissive.lerp(new THREE.Color(0x0a1622), 0.05);
         }
 
         // C. MOVIMIENTO
@@ -231,6 +234,12 @@ function animate() {
             fishGroup.position.x -= speed * 3; // Nadan muy rápido huyendo
             fishGroup.position.y = originalY + Math.sin(time * 10 + offset) * 1.5; // Movimiento errático
             if(fishGroup.position.x < -15) fishGroup.position.x = 15;
+        } else if (pollutionState.fishing) {
+            // --- SOBREPESCA (sin desaparecer) ---
+            fishGroup.rotation.z = THREE.MathUtils.lerp(fishGroup.rotation.z, 0.1, 0.04);
+            fishGroup.position.x -= speed * 0.7;
+            fishGroup.position.y = originalY + Math.sin(time * 1.4 + offset) * 0.25;
+            if(fishGroup.position.x < -15) fishGroup.position.x = 15;
         } else {
             // --- VIDA NORMAL ---
             fishGroup.rotation.z = 0; 
@@ -243,16 +252,16 @@ function animate() {
         }
     });
 
-    // 2. AnimaciÃ³n de Basura
+    // 2. Animación de Basura
     trashItems.forEach((trash, idx) => {
         if(trash.visible) {
             trash.rotation.x += 0.01;
             trash.rotation.y += 0.01;
-            trash.position.y += Math.sin(time + idx) * 0.005; // FlotaciÃ³n mÃ¡s notoria
+            trash.position.y += Math.sin(time + idx) * 0.005; // Flotación más notoria
         }
     });
 
-    // 3. Efectos de CÃ¡mara y PartÃ­culas (Deterioro del Ecosistema)
+    // 3. Efectos de Cámara y Partículas (Deterioro del Ecosistema)
     const activeCount = Object.values(pollutionState).filter(Boolean).length;
     
     if (activeCount > 0) {
@@ -260,7 +269,7 @@ function animate() {
         let shakeIntensity = 0.08 * activeCount; // AUMENTADO: Temblor mucho más fuerte
         if (pollutionState.noise) shakeIntensity += 0.15; // Ruido añade vibración extra
         
-        // Movimiento de cámara "borracho" o inestable
+        // Movimiento de cÃ¡mara "borracho" o inestable
         camera.position.x = Math.sin(time * (5 + activeCount)) * shakeIntensity;
         camera.position.y = 1 + Math.cos(time * (3 + activeCount)) * (shakeIntensity * 0.5);
         
@@ -294,7 +303,7 @@ function animate() {
         }
     } else {
         camera.position.x = 0;
-        // La posiciÃ³n Y de la cÃ¡mara se mantiene en 1 para evitar saltos
+        // La posición Y de la cámara se mantiene en 1 para evitar saltos
         if(particlesMesh) particlesMesh.rotation.y = time * 0.02; // Corriente suave
     }
 
@@ -357,7 +366,7 @@ const actionMessages = {
     }
 };
 
-// --- 6. INTEGRACIï¿½"N CON INTERFAZ (Sobrescribir funciones globales) ---
+// --- 6. INTEGRACIÓN CON INTERFAZ (Sobrescribir funciones globales) ---
 
 // Sobrescribir applyDegradation (CONTAMINAR)
 window.applyDegradation = function(type) {
@@ -395,6 +404,9 @@ function updateEnvironmentVisuals() {
 
     // --- 1. EFECTOS DOM (Graduales) ---
     const simContainer = document.getElementById('simulation-container') || document.body;
+    const oceanBg = document.getElementById('ocean-bg');
+    const oceanCanvas = document.getElementById('ocean-canvas');
+    const particlesLayer = document.getElementById('particles');
     const nav = document.querySelector('nav');
     const overlay = document.getElementById('immersion-overlay');
     const restorationCard = document.getElementById('restoration-card');
@@ -408,16 +420,27 @@ function updateEnvironmentVisuals() {
     let filters = [];
     // Filtros específicos
     if (trash) filters.push('sepia(0.6) hue-rotate(-30deg)'); // Agua sucia
-    if (bleaching) filters.push('brightness(1.1) contrast(0.9) grayscale(0.4)'); // Luz cegadora/muerta (Ajustado)
-    if (fishing) filters.push('saturate(0.2) brightness(0.9)'); // Vacío (Ajustado)
-    if (oil) filters.push('brightness(0.6) sepia(0.5) contrast(1.2)'); // Oscuridad tóxica (Más visible)
+    if (bleaching) filters.push('brightness(1.1) contrast(0.9) grayscale(0.4)'); // Luz cegadora/muerta
+    if (fishing) filters.push('saturate(0.2) brightness(0.9)'); // Vacío
+    if (oil) filters.push('brightness(0.6) sepia(0.5) contrast(1.2)'); // Oscuridad tóxica
     if (noise) filters.push('blur(1px) contrast(1.2)'); // Vibración visual
 
     // Filtro acumulativo (Desenfoque aumenta con cada problema)
-    if (activeCount > 0) filters.push(`blur(${activeCount * 0.3}px)`); // REDUCIDO: Blur más suave y gradual
+    if (activeCount > 0) filters.push(`blur(${activeCount * 0.3}px)`);
 
-    simContainer.style.transition = "filter 2s ease";
-    simContainer.style.filter = filters.length > 0 ? filters.join(' ') : 'none';
+    // APLICAR FILTROS AL CONTENEDOR PRINCIPAL (Igual que en ecosystem-state.js)
+    const filterValue = filters.length > 0 ? filters.join(' ') : 'none';
+    
+    // Aplicar al contenedor de simulación para afectar UI y Fondo
+    if (simContainer) {
+        simContainer.style.transition = "filter 2s ease";
+        simContainer.style.filter = filterValue;
+    }
+
+    // Limpiar filtros individuales de fondo para evitar doble efecto
+    [oceanBg, oceanCanvas, particlesLayer].filter(Boolean).forEach((el) => {
+        el.style.filter = "";
+    });
     
     // Overlay inmersivo
     if (overlay) {
@@ -480,9 +503,10 @@ function updateEnvironmentVisuals() {
             if(container.classList.contains('animate-float')) container.classList.remove('animate-float'); // Detener flotación suave
             
             // Caos progresivo: Rotación, Skew y Desplazamiento
-            const chaos = activeCount * 1.5; // REDUCIDO: Para que no se rompa tanto
-            const rot = (Math.random() - 0.5) * chaos * 0.5; 
-            const skew = (Math.random() - 0.5) * chaos * 0.5;
+            // Ajustado para coincidir con ecosystem-state.js
+            const chaos = activeCount * 1.5; 
+            const rot = (Math.random() - 0.5) * chaos; 
+            const skew = (Math.random() - 0.5) * chaos;
             const scale = 1 - (chaos * 0.01); 
             
             // Añadir desplazamiento aleatorio para "desencajar" la web
@@ -525,38 +549,26 @@ function updateEnvironmentVisuals() {
         }
     }
 
-    // 2. Romper las Tarjetas (Separarlas violentamente)
-    if (negativeCard && restorationCard) {
-        if (activeCount > 0) {
-            // Tarjeta negativa se cae a la izquierda
-            const negRot = -0.5 * activeCount; // REDUCIDO
-            const negX = -5 * activeCount; // REDUCIDO: Se aleja menos
-            const negY = 2 * activeCount; // Cae menos
+    // 2. DESTRUCCIÓN DE ELEMENTOS INTERNOS (Igual que ecosystem-state.js)
+    // Afecta a las tarjetas de control y otros elementos de UI
+    const innerElements = document.querySelectorAll('.glass-card, .group, article, .visual-card');
+    
+    if (activeCount > 0) {
+        innerElements.forEach((el, idx) => {
+            // Determinismo visual basado en índice
+            const sign = idx % 2 === 0 ? 1 : -1;
+            const randomRot = sign * (Math.random() * activeCount * 5); 
+            const randomY = (Math.random() * activeCount * 20); 
             
-            negativeCard.style.transition = "transform 0.5s ease";
-            negativeCard.style.transform = `translate(${negX}px, ${negY}px) rotate(${negRot}deg)`;
-            negativeCard.style.borderColor = `rgba(255, 0, 0, ${activeCount * 0.15})`;
-
-            // CAOS INTERNO: Los botones de la tarjeta negativa se "descuajeringan"
-            const negButtons = negativeCard.querySelectorAll('button');
-            negButtons.forEach((btn, idx) => {
-                if (activeCount >= 3) {
-                    // Aleatoriedad determinista basada en índice
-                    const randR = (idx % 2 === 0 ? 1 : -1) * (activeCount * 2); // REDUCIDO
-                    const randY = activeCount * 2;
-                    btn.style.transform = `translateY(${randY}px) rotate(${randR}deg)`;
-                    btn.style.opacity = 0.8;
-                } else {
-                    btn.style.transform = "none";
-                    btn.style.opacity = 1;
-                }
-            });
-
-        } else {
-            negativeCard.style.transform = "none";
-            negativeCard.style.borderColor = "rgba(255, 255, 255, 0.1)";
-            negativeCard.querySelectorAll('button').forEach(b => b.style.transform = "none");
-        }
+            el.style.transition = "transform 0.5s ease";
+            el.style.transform = `translateY(${randomY}px) rotate(${randomRot}deg)`;
+            el.style.opacity = Math.max(0.7, 1 - (activeCount * 0.05));
+        });
+    } else {
+        innerElements.forEach(el => {
+            el.style.transform = "";
+            el.style.opacity = "";
+        });
     }
 
     // RESALTAR TARJETA DE RESTAURACIÓN (La solución)
@@ -853,7 +865,7 @@ function updateStatus(text, textColorClass, dotColorClass) {
     }
 }
 
-// SecciÃ³n "¿QuÃ© pasarÃ­a si...?"
+// Sección "¿Qué pasaría si...?"
 function initWhatIfInteraction() {
     const blocks = [
         document.getElementById('whatif-block-a'),
@@ -922,470 +934,6 @@ function initWhatIfInteraction() {
     renderBlock();
 }
 
-// Mini simulador "Elige tu decisiÃ³n"
-function initDecisionSimulator() {
-    const options = document.querySelectorAll('.decision-option');
-    const tint = document.getElementById('decision-screen-tint');
-    const feedback = document.getElementById('decision-feedback');
-    const title = document.getElementById('decision-title');
-    const text = document.getElementById('decision-text');
-    const icon = document.getElementById('decision-icon');
-    const wave = document.getElementById('decision-wave');
-
-    if (!options.length || !tint || !feedback || !title || !text || !icon || !wave) {
-        return;
-    }
-
-    function animateFeedback() {
-        feedback.classList.remove('hidden', 'opacity-100', 'translate-y-0');
-        feedback.classList.add('opacity-0', 'translate-y-3');
-        wave.classList.remove('opacity-0', 'animate-pulse');
-
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                feedback.classList.remove('opacity-0', 'translate-y-3');
-                feedback.classList.add('opacity-100', 'translate-y-0');
-                wave.classList.add('opacity-100', 'animate-pulse');
-            });
-        });
-    }
-
-    function setDecision(option) {
-        const tone = option.dataset.tone || 'good';
-        const messageTitle = option.dataset.title || 'Consecuencia de esta decisiÃ³n';
-        const messageText = option.dataset.text || '';
-        const messageIcon = option.dataset.icon || '🌊';
-
-        if (tone === 'bad') {
-            tint.style.background = 'rgba(185, 28, 28, 0.18)';
-            tint.style.opacity = '1';
-            icon.textContent = messageIcon;
-            title.textContent = messageTitle;
-            text.textContent = messageText;
-            wave.className = 'mt-4 h-2 rounded-full bg-gradient-to-r from-transparent via-red-300/70 to-transparent';
-            options.forEach((btn) => btn.classList.remove('ring-2', 'ring-green-300', 'ring-red-300'));
-            option.classList.add('ring-2', 'ring-red-300');
-        } else {
-            tint.style.background = 'rgba(22, 163, 74, 0.18)';
-            tint.style.opacity = '1';
-            icon.textContent = messageIcon;
-            title.textContent = messageTitle;
-            text.textContent = messageText;
-            wave.className = 'mt-4 h-2 rounded-full bg-gradient-to-r from-transparent via-green-300/70 to-transparent';
-            options.forEach((btn) => btn.classList.remove('ring-2', 'ring-green-300', 'ring-red-300'));
-            option.classList.add('ring-2', 'ring-green-300');
-        }
-
-        animateFeedback();
-    }
-
-    options.forEach((button) => {
-        button.addEventListener('mouseleave', () => {
-            tint.style.opacity = '0';
-        });
-        button.addEventListener('mouseenter', () => setDecision(button));
-        button.addEventListener('click', () => setDecision(button));
-    });
-}
-
-// Mini simulador por preguntas: "El oceano depende de ti..."
-function initDecisionQuizSimulator() {
-    const tint = document.getElementById('decision-screen-tint');
-    const feedback = document.getElementById('decision-feedback');
-    const title = document.getElementById('decision-title');
-    const text = document.getElementById('decision-text');
-    const icon = document.getElementById('decision-icon');
-    const wave = document.getElementById('decision-wave');
-
-    const progress = document.getElementById('decision-progress');
-    const progressBar = document.getElementById('decision-progress-bar');
-    const questionText = document.getElementById('decision-question-text');
-    const optionA = document.getElementById('decision-option-a');
-    const optionB = document.getElementById('decision-option-b');
-    const prevBtn = document.getElementById('decision-prev-btn');
-    const nextBtn = document.getElementById('decision-next-btn');
-
-    if (!tint || !feedback || !title || !text || !icon || !wave || !progress || !progressBar || !questionText || !optionA || !optionB || !prevBtn || !nextBtn) {
-        return;
-    }
-
-    const questionBank = [
-        {
-            q: 'Tras una actividad en playa, ¿que decision tiene menor impacto en tortugas y peces costeros?',
-            options: [
-                {
-                    heading: 'Dejo envases y envolturas porque luego pasa el aseo municipal',
-                    tone: 'bad',
-                    icon: 'status',
-                    title: 'Consecuencia de esta decision',
-                    text: 'El plastico puede tardar mas de 400 anios en degradarse y afectar a tortugas, peces y aves marinas.'
-                },
-                {
-                    heading: 'Clasifico residuos y me llevo reciclables al salir',
-                    tone: 'good',
-                    icon: 'status',
-                    title: 'Impacto de esta decision',
-                    text: 'Ayudas a reducir la contaminacion y proteges la vida marina, mejorando el equilibrio del ecosistema.'
-                }
-            ]
-        },
-        {
-            q: 'En casa, ¿que accion reduce mejor la contaminacion que finalmente llega al oceano?',
-            options: [
-                {
-                    heading: 'Verter aceite usado por el fregadero',
-                    tone: 'bad',
-                    icon: 'status',
-                    title: 'Consecuencia de esta decision',
-                    text: 'El vertido de aceite reduce oxigeno y afecta organismos marinos desde la base de la cadena alimentaria.'
-                },
-                {
-                    heading: 'Guardar aceite usado y llevarlo a un punto autorizado',
-                    tone: 'good',
-                    icon: 'status',
-                    title: 'Impacto de esta decision',
-                    text: 'Evitas contaminacion en cuerpos de agua y contribuyes a mantener ecosistemas marinos mas saludables.'
-                }
-            ]
-        },
-        {
-            q: 'Si compras bebidas con frecuencia, ¿que habito disminuye mas el residuo plastico marino?',
-            options: [
-                {
-                    heading: 'Usar botellas desechables en cada salida',
-                    tone: 'bad',
-                    icon: 'status',
-                    title: 'Consecuencia de esta decision',
-                    text: 'Se incrementa el volumen de residuos de un solo uso y el riesgo para fauna como tortugas y peces.'
-                },
-                {
-                    heading: 'Llevar botella reutilizable y recargar agua',
-                    tone: 'good',
-                    icon: 'status',
-                    title: 'Impacto de esta decision',
-                    text: 'Disminuyes residuos persistentes y ayudas a proteger habitats marinos a mediano y largo plazo.'
-                }
-            ]
-        },
-        {
-            q: 'En una jornada comunitaria, ¿que decision genera un cambio mas sostenible?',
-            options: [
-                {
-                    heading: 'Recoger basura una vez, sin separar ni registrar hallazgos',
-                    tone: 'bad',
-                    icon: 'status',
-                    title: 'Consecuencia de esta decision',
-                    text: 'El impacto positivo se reduce y no se identifican fuentes de residuos para prevenir nueva contaminacion.'
-                },
-                {
-                    heading: 'Participar en limpiezas con separacion de residuos y educacion local',
-                    tone: 'good',
-                    icon: 'status',
-                    title: 'Impacto de esta decision',
-                    text: 'Se reduce la basura marina y se fortalece una cultura ambiental que protege playas y ecosistemas.'
-                }
-            ]
-        },
-        {
-            q: 'Cuando visitas una isla, ¿que accion protege mejor los arrecifes cercanos?',
-            options: [
-                {
-                    heading: 'Caminar sobre zonas coralinas para tomar fotos',
-                    tone: 'bad',
-                    icon: 'status',
-                    title: 'Consecuencia de esta decision',
-                    text: 'El contacto fisico rompe estructuras coralinas y afecta refugios de peces juveniles.'
-                },
-                {
-                    heading: 'Respetar zonas delimitadas y no tocar corales',
-                    tone: 'good',
-                    icon: 'status',
-                    title: 'Impacto de esta decision',
-                    text: 'Ayudas a conservar arrecifes funcionales y a mantener su biodiversidad.'
-                }
-            ]
-        },
-        {
-            q: 'Si organizas un evento en playa, ¿que decision reduce mas residuos?',
-            options: [
-                {
-                    heading: 'Usar vasos y cubiertos de un solo uso',
-                    tone: 'bad',
-                    icon: 'status',
-                    title: 'Consecuencia de esta decision',
-                    text: 'Aumenta residuos que pueden terminar en el mar por viento o lluvia.'
-                },
-                {
-                    heading: 'Usar vajilla reutilizable y puntos de basura',
-                    tone: 'good',
-                    icon: 'status',
-                    title: 'Impacto de esta decision',
-                    text: 'Disminuyes desechos y facilitas una gestion adecuada de residuos.'
-                }
-            ]
-        },
-        {
-            q: 'En temporada de lluvias, ¿que habito ayuda mas al oceano desde la ciudad?',
-            options: [
-                {
-                    heading: 'Botar basura en cunetas y desagues',
-                    tone: 'bad',
-                    icon: 'status',
-                    title: 'Consecuencia de esta decision',
-                    text: 'Los residuos viajan por drenajes hacia rios y finalmente al mar.'
-                },
-                {
-                    heading: 'Mantener limpios drenajes y separar desechos',
-                    tone: 'good',
-                    icon: 'status',
-                    title: 'Impacto de esta decision',
-                    text: 'Reduces el arrastre de residuos y proteges ecosistemas costeros.'
-                }
-            ]
-        },
-        {
-            q: 'Si compras mariscos, ¿que decision favorece mejor la sostenibilidad marina?',
-            options: [
-                {
-                    heading: 'Comprar especies sin revisar su origen',
-                    tone: 'bad',
-                    icon: 'status',
-                    title: 'Consecuencia de esta decision',
-                    text: 'Puede aumentar la presion sobre especies y zonas de pesca vulnerables.'
-                },
-                {
-                    heading: 'Elegir productos de pesca responsable',
-                    tone: 'good',
-                    icon: 'status',
-                    title: 'Impacto de esta decision',
-                    text: 'Apoyas practicas que cuidan poblaciones y habitats marinos.'
-                }
-            ]
-        }
-    ];
-
-    function pickRandomQuestions(pool, count) {
-        // Algoritmo Fisher-Yates para una aleatoriedad real y robusta
-        const shuffled = [...pool];
-        for (let i = shuffled.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-        return shuffled.slice(0, count);
-    }
-
-    let questions = pickRandomQuestions(questionBank, 4);
-    let currentQuestion = 0;
-    let quizFinished = false;
-    let selectedByQuestion = new Array(questions.length).fill(null);
-    let currentDisplayOptions = [];
-
-    function animateFeedback() {
-        feedback.classList.remove('hidden', 'opacity-100', 'translate-y-0');
-        feedback.classList.add('opacity-0', 'translate-y-3');
-        wave.classList.remove('opacity-0', 'animate-pulse');
-
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                feedback.classList.remove('opacity-0', 'translate-y-3');
-                feedback.classList.add('opacity-100', 'translate-y-0');
-                wave.classList.add('opacity-100', 'animate-pulse');
-            });
-        });
-    }
-
-    function paintTint(tone) {
-        if (tone === 'bad') {
-            tint.style.background = 'rgba(185, 28, 28, 0.18)';
-        } else if (tone === 'good') {
-            tint.style.background = 'rgba(22, 163, 74, 0.18)';
-        } else {
-            tint.style.background = 'rgba(56, 189, 248, 0.16)';
-        }
-        tint.style.opacity = '1';
-    }
-
-    function clearSelectionVisuals() {
-        [optionA, optionB].forEach((btn) => btn.classList.remove('ring-4', 'ring-green-400', 'ring-red-500', 'bg-green-500/20', 'bg-red-500/20', 'border-green-400', 'border-red-500', 'scale-[1.02]', 'opacity-50'));
-    }
-
-    function styleChoiceButton(button, option) {
-        // MEJORA VISUAL: Botones más atractivos con gradientes y elevación
-        // Ajuste Mobile: p-4 en lugar de p-6 para ganar espacio horizontal
-        button.className = 'decision-option group relative text-left p-4 md:p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:from-white/10 hover:to-white/5 hover:border-white/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.3)] flex flex-col justify-center min-h-[100px] md:min-h-[160px]';
-        button.innerHTML = `
-            <div class="w-full">
-                <h3 class="text-sm md:text-xl font-bold text-white leading-tight group-hover:text-primary transition-colors">${option.heading}</h3>
-            </div>
-        `;
-    }
-
-    function showResult(option) {
-        paintTint(option.tone);
-        wave.className = option.tone === 'bad'
-            ? 'mt-4 h-2 rounded-full bg-gradient-to-r from-transparent via-red-300/70 to-transparent'
-            : 'mt-4 h-2 rounded-full bg-gradient-to-r from-transparent via-green-300/70 to-transparent';
-        icon.textContent = option.tone === 'bad' ? '🟥' : '🟢';
-        title.textContent = option.title;
-        text.textContent = option.text;
-        animateFeedback();
-    }
-
-    function selectOption(index) {
-        selectedByQuestion[currentQuestion] = currentDisplayOptions[index];
-        const isGood = currentDisplayOptions[index].tone === 'good';
-        
-        clearSelectionVisuals();
-        const selectedButton = index === 0 ? optionA : optionB;
-        const otherButton = index === 0 ? optionB : optionA;
-
-        // Feedback visual fuerte al seleccionar
-        if (isGood) {
-            selectedButton.classList.add('ring-4', 'ring-green-400', 'bg-green-500/20', 'border-green-400', 'scale-[1.02]');
-            paintTint('good');
-        } else {
-            selectedButton.classList.add('ring-4', 'ring-red-500', 'bg-red-500/20', 'border-red-500', 'scale-[1.02]');
-            paintTint('bad');
-        }
-        
-        // Opacar la opción no seleccionada
-        otherButton.classList.add('opacity-50');
-    }
-
-    function renderQuestion() {
-        if (quizFinished) return;
-        const question = questions[currentQuestion];
-        const total = questions.length;
-        // Aleatorizar el orden de las opciones (50/50) para evitar patrones predecibles
-        currentDisplayOptions = Math.random() < 0.5
-            ? [question.options[0], question.options[1]]
-            : [question.options[1], question.options[0]];
-
-        questionText.textContent = question.q;
-        progress.textContent = `Pregunta ${currentQuestion + 1} de ${total}`;
-        progressBar.style.width = `${((currentQuestion + 1) / total) * 100}%`;
-
-        styleChoiceButton(optionA, currentDisplayOptions[0]);
-        styleChoiceButton(optionB, currentDisplayOptions[1]);
-        clearSelectionVisuals();
-        tint.style.opacity = '0';
-
-        prevBtn.disabled = currentQuestion === 0;
-        prevBtn.classList.toggle('opacity-40', currentQuestion === 0);
-        nextBtn.textContent = currentQuestion === total - 1 ? 'Ver resultado' : 'Siguiente';
-
-        const selected = selectedByQuestion[currentQuestion];
-        if (selected) {
-            const selectedButton = selected === currentDisplayOptions[0] ? optionA : optionB;
-            const otherButton = selected === currentDisplayOptions[0] ? optionB : optionA;
-            
-            // Restaurar estado visual si ya se respondió
-            const isGood = selected.tone === 'good';
-            if (isGood) {
-                selectedButton.classList.add('ring-4', 'ring-green-400', 'bg-green-500/20', 'border-green-400');
-                paintTint('good');
-            } else {
-                selectedButton.classList.add('ring-4', 'ring-red-500', 'bg-red-500/20', 'border-red-500');
-                paintTint('bad');
-            }
-            otherButton.classList.add('opacity-50');
-        }
-    }
-
-    // Eliminados los eventos mouseenter/mouseleave que causaban el parpadeo molesto del fondo
-    optionA.addEventListener('click', () => selectOption(0));
-    optionB.addEventListener('click', () => selectOption(1));
-
-    prevBtn.addEventListener('click', () => {
-        if (quizFinished) return;
-        if (currentQuestion > 0) {
-            currentQuestion -= 1;
-            renderQuestion();
-        }
-    });
-
-    function showFinalResults() {
-        const total = questions.length;
-        let score = 0;
-        const lines = questions.map((question, index) => {
-            const selectedOption = selectedByQuestion[index];
-            const isCorrect = selectedOption && selectedOption.tone === 'good';
-            if (isCorrect) score += 1;
-            const reasonText = selectedOption ? selectedOption.text : 'No se seleccionó una respuesta en esta pregunta.';
-            const selectedLabel = selectedOption ? selectedOption.heading : 'Sin respuesta seleccionada';
-            return `
-                <details class="bg-white/5 border border-white/10 rounded-xl p-3">
-                    <summary class="cursor-pointer list-none flex items-center gap-2">
-                        <span class="material-symbols-outlined text-base ${isCorrect ? 'text-green-300' : 'text-red-300'}">${isCorrect ? 'check_circle' : 'cancel'}</span>
-                        <strong>Pregunta ${index + 1}: ${isCorrect ? 'Respuesta correcta' : 'Respuesta incorrecta'}</strong>
-                    </summary>
-                    <div class="mt-2 text-sm text-slate-200">
-                        <div><strong>Tu respuesta:</strong> ${selectedLabel}</div>
-                        <div class="text-slate-300 mt-1"><strong>Motivo:</strong> ${reasonText}</div>
-                    </div>
-                </details>
-            `;
-        });
-
-        quizFinished = true;
-        prevBtn.disabled = true;
-        prevBtn.classList.add('opacity-40');
-        nextBtn.textContent = 'Reiniciar cuestionario';
-
-        paintTint(score >= 3 ? 'good' : 'bad');
-        icon.className = `material-symbols-outlined text-2xl leading-none ${score >= 3 ? 'text-green-300' : 'text-coral-glow'}`;
-        icon.textContent = score >= 3 ? 'workspace_premium' : 'waves';
-        title.textContent = `Resultado final: ${score} de ${total}`;
-        const intro = score >= 3
-            ? 'Buen trabajo. Tus decisiones ayudan al oceano.'
-            : 'Puedes mejorar. Cada decision cuenta para proteger el oceano.';
-        text.innerHTML = `${intro}<br><br><span class="text-sm text-slate-300">Haz clic en cada pregunta para ver la explicación correspondiente.</span><br><br><div class="space-y-2">${lines.join('')}</div>`;
-        wave.className = score >= 3
-            ? 'mt-4 h-2 rounded-full bg-gradient-to-r from-transparent via-green-300/70 to-transparent'
-            : 'mt-4 h-2 rounded-full bg-gradient-to-r from-transparent via-red-300/70 to-transparent';
-        animateFeedback();
-    }
-
-    function restartQuiz() {
-        questions = pickRandomQuestions(questionBank, 4);
-        currentQuestion = 0;
-        quizFinished = false;
-        selectedByQuestion = new Array(questions.length).fill(null);
-        feedback.classList.add('hidden');
-        tint.style.opacity = '0';
-        nextBtn.textContent = 'Siguiente';
-        renderQuestion();
-    }
-
-    nextBtn.addEventListener('click', () => {
-        if (quizFinished) {
-            restartQuiz();
-            return;
-        }
-        const selectedOption = selectedByQuestion[currentQuestion];
-        if (!selectedOption) {
-            paintTint('bad');
-            icon.className = 'material-symbols-outlined text-2xl leading-none text-amber-300';
-            icon.textContent = 'warning';
-            title.textContent = 'Selecciona una opción';
-            text.textContent = 'Elige una respuesta antes de pasar a la siguiente pregunta.';
-            wave.className = 'mt-4 h-2 rounded-full bg-gradient-to-r from-transparent via-amber-300/70 to-transparent';
-            animateFeedback();
-            return;
-        }
-
-        if (currentQuestion < questions.length - 1) {
-            currentQuestion += 1;
-            renderQuestion();
-            return;
-        }
-
-        showFinalResults();
-    });
-
-    renderQuestion();
-}
-
 // Simulador Drag & Drop: "Arrastra y decide"
 function initDragDecideSimulator() {
     const items = document.querySelectorAll('.drag-item');
@@ -1397,59 +945,60 @@ function initDragDecideSimulator() {
     const feedback = document.getElementById('drag-feedback');
     const feedbackTitle = document.getElementById('drag-feedback-title');
     const feedbackText = document.getElementById('drag-feedback-text');
+    const feedbackState = document.getElementById('drag-feedback-state');
+    const feedbackIcon = document.getElementById('drag-feedback-icon');
     const resetButton = document.getElementById('drag-reset-btn');
     const floatingItems = document.getElementById('floating-items');
-    const progressText = document.getElementById('drag-progress-text');
-    const progressBar = document.getElementById('drag-progress-bar');
 
-    if (!items.length || !tintLayer || !feedback || !floatingItems || !progressText || !progressBar) {
+    if (!items.length || !tintLayer || !feedback || !floatingItems || !feedbackTitle || !feedbackText) {
         return;
     }
 
     let draggedItem = null;
+    let selectedItem = null;
+    let finalResultShown = false;
+
     const initialItemsParent = floatingItems;
     const initialOrder = Array.from(items);
-    
-    let totalItems = items.length;
+
+    const totalItems = items.length;
     let score = 0;
 
-    // Función centralizada para manejar el evento de soltar (Drop)
-    // Funciona tanto para Mouse como para Touch
-    function handleDropLogic(zoneElement, item) {
-        const entry = zones.find(z => z.id === zoneElement.id);
-        if (!entry) return;
+    function getProgressSnapshot() {
+        const classifiedItems = document.querySelectorAll('.drop-zone .drag-item').length;
+        return { classifiedItems };
+    }
 
-        // Limpieza visual
-        zoneElement.classList.remove('ring-4', 'ring-white/40', 'scale-[1.02]');
-        
-        // Resetear estilos de arrastre (especialmente los de touch)
-        item.classList.remove('opacity-50', 'scale-110', 'z-50');
-        item.style.position = '';
-        item.style.left = '';
-        item.style.top = '';
-        item.style.zIndex = '';
-        item.style.width = '';
+    function getAccuracyPercentage() {
+        return totalItems > 0 ? (score / totalItems) * 100 : 0;
+    }
 
-        setPlacedStyle(item, true);
+    function getKeyImpact(text) {
+        if (!text) return '';
+        const firstSentence = text.split('.')[0]?.trim() || text.trim();
+        const compact = firstSentence.length > 95 ? `${firstSentence.slice(0, 95)}...` : firstSentence;
+        return compact;
+    }
 
-        const dropItems = zoneElement.querySelector('.drop-items');
-        if (dropItems) dropItems.appendChild(item);
+    function setZoneCue(active) {
+        zones.forEach((entry) => {
+            const zoneElement = document.getElementById(entry.id);
+            if (!zoneElement) return;
+            if (active) {
+                zoneElement.classList.add('ring-2', 'ring-white/40');
+            } else {
+                zoneElement.classList.remove('ring-2', 'ring-white/40', 'ring-4', 'scale-[1.02]');
+            }
+        });
+    }
 
-        // Feedback Visual
-        tintLayer.style.background = entry.tint;
-        tintLayer.style.opacity = '1';
-        setTimeout(() => { tintLayer.style.opacity = '0'; }, 500);
-
-        const isCorrect = item.dataset.correctZone === entry.zone;
-        const colorClass = isCorrect ? 'bg-green-500/20' : 'bg-red-500/20';
-        
-        zoneElement.classList.add(colorClass);
-        setTimeout(() => zoneElement.classList.remove(colorClass), 600);
-
-        const title = isCorrect ? `✅ Correcto: ${item.dataset.label}` : `❌ Incorrecto: ${item.dataset.label}`;
-        showFeedback(title, item.dataset.explanation, isCorrect);
-        recalculateState();
-        draggedItem = null;
+    function clearSelectedItem() {
+        if (!selectedItem) return;
+        selectedItem.style.outline = '';
+        selectedItem.style.outlineOffset = '';
+        selectedItem.classList.remove('scale-110', 'z-50');
+        selectedItem = null;
+        setZoneCue(false);
     }
 
     function setPlacedStyle(item, placed) {
@@ -1457,18 +1006,16 @@ function initDragDecideSimulator() {
         const imgContainer = item.querySelector('.card-img-container');
 
         if (placed) {
-            // Modo "Icono Compacto" (Clash Royale en tablero)
             item.classList.remove('w-full');
-            item.classList.add('w-16', 'h-16', 'rounded-lg'); // Cuadrado pequeño
+            item.classList.add('w-12', 'h-12', 'rounded-lg');
             if (textDiv) textDiv.classList.add('hidden');
             if (imgContainer) {
                 imgContainer.classList.remove('h-20', 'md:h-24');
                 imgContainer.classList.add('h-full');
             }
         } else {
-            // Modo "Carta Completa" (En mano)
             item.classList.add('w-full');
-            item.classList.remove('w-16', 'h-16', 'rounded-lg');
+            item.classList.remove('w-12', 'h-12', 'rounded-lg');
             if (textDiv) textDiv.classList.remove('hidden');
             if (imgContainer) {
                 imgContainer.classList.add('h-20', 'md:h-24');
@@ -1477,20 +1024,66 @@ function initDragDecideSimulator() {
         }
     }
 
-    function updateProgress() {
-        const classifiedItems = document.querySelectorAll('.drop-zone .drag-item').length;
-        const percentage = totalItems > 0 ? (classifiedItems / totalItems) * 100 : 0;
-        
-        if (progressText) progressText.textContent = `${classifiedItems} / ${totalItems}`;
-        if (progressBar) progressBar.style.width = `${percentage}%`;
+    function showFeedback(title, message, tone = 'info') {
+        const resolvedTone = tone === true ? 'good' : tone === false ? 'bad' : (tone || 'info');
+        feedbackTitle.textContent = title;
+        feedbackText.textContent = message;
 
-        if (classifiedItems === totalItems) {
-            setTimeout(showFinalResult, 800);
-        } else {
-            const isFinalFeedback = feedbackText.textContent.includes("Tus decisiones demuestran");
-            if (!feedback.classList.contains('hidden') && isFinalFeedback) {
-                 feedback.classList.add('hidden');
+        feedback.classList.remove(
+            'hidden',
+            'opacity-100',
+            'translate-y-0',
+            'border-green-400/40',
+            'border-red-400/40',
+            'border-cyan-300/30'
+        );
+        feedback.classList.add('opacity-0', 'translate-y-3');
+
+        const palette = {
+            good: {
+                border: 'border-green-400/40',
+                state: 'Correcto',
+                stateClass: 'border-green-300/35 bg-green-400/12 text-green-100',
+                icon: 'check_circle'
+            },
+            bad: {
+                border: 'border-red-400/40',
+                state: 'Revisa',
+                stateClass: 'border-red-300/35 bg-red-400/12 text-red-100',
+                icon: 'error'
+            },
+            info: {
+                border: 'border-cyan-300/30',
+                state: 'Listo',
+                stateClass: 'border-cyan-300/35 bg-cyan-400/12 text-cyan-100',
+                icon: 'tips_and_updates'
             }
+        };
+
+        const current = palette[resolvedTone] || palette.info;
+        feedback.classList.add(current.border);
+
+        if (feedbackState) {
+            feedbackState.textContent = current.state;
+            feedbackState.className = `inline-flex items-center px-2.5 py-1 rounded-full text-[11px] uppercase tracking-[0.12em] font-bold border ${current.stateClass}`;
+        }
+        if (feedbackIcon) feedbackIcon.textContent = current.icon;
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                feedback.classList.remove('opacity-0', 'translate-y-3');
+                feedback.classList.add('opacity-100', 'translate-y-0');
+            });
+        });
+    }
+
+    function updateProgress() {
+        const snapshot = getProgressSnapshot();
+        if (snapshot.classifiedItems === totalItems && !finalResultShown) {
+            finalResultShown = true;
+            setTimeout(showFinalResult, 600);
+        } else if (snapshot.classifiedItems < totalItems) {
+            finalResultShown = false;
         }
     }
 
@@ -1509,56 +1102,110 @@ function initDragDecideSimulator() {
                 if (item.dataset.correctZone === 'protege') newScore++;
             });
         }
+
         score = newScore;
         updateProgress();
     }
 
     function showFinalResult() {
         const finalScore = score;
-        const percentage = totalItems > 0 ? (finalScore / totalItems) * 100 : 0;
-        let title, message;
+        const percentage = getAccuracyPercentage();
+        let title;
+        let message;
 
         if (percentage >= 80) {
-            title = `¡Excelente! ${finalScore}/${totalItems} correctos`;
-            message = "Tus decisiones demuestran un gran conocimiento sobre cómo proteger nuestros océanos. ¡Sigue así!";
+            title = `Excelente: ${finalScore}/${totalItems}`;
+            message = 'Clasificaste bien la mayoría de los casos.';
         } else if (percentage >= 50) {
-            title = `¡Buen trabajo! ${finalScore}/${totalItems} correctos`;
-            message = "Vas por buen camino. Algunas decisiones son complejas, pero cada acierto es una victoria para el mar.";
+            title = `Buen avance: ${finalScore}/${totalItems}`;
+            message = 'Vas por buen camino. Aún hay decisiones por ajustar.';
         } else {
-            title = `Se puede mejorar: ${finalScore}/${totalItems} correctos`;
-            message = "No te preocupes. Lo importante es aprender. Revisa las explicaciones y vuelve a intentarlo para fortalecer tu conocimiento.";
+            title = `Puedes mejorar: ${finalScore}/${totalItems}`;
+            message = 'Revisa los impactos clave y vuelve a intentarlo.';
         }
-        showFeedback(title, message, percentage >= 50);
+
+        showFeedback(title, message, percentage >= 60 ? 'good' : 'bad');
     }
 
-    function showFeedback(title, message, isCorrect) {
-        feedbackTitle.textContent = title;
-        feedbackText.textContent = message;
-        feedback.classList.remove('hidden', 'opacity-100', 'translate-y-0', 'border-green-400/40', 'border-red-400/40', 'border-amber-400/40');
-        feedback.classList.add('opacity-0', 'translate-y-3');
-
-        if (isCorrect === true) {
-            feedback.classList.add('border-green-400/40');
-        } else if (isCorrect === false) {
-            feedback.classList.add('border-red-400/40');
-        } else {
-            feedback.classList.add('border-amber-400/40');
+    function selectItemForClickDrop(item) {
+        if (selectedItem === item) {
+            clearSelectedItem();
+            return;
         }
 
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                feedback.classList.remove('opacity-0', 'translate-y-3');
-                feedback.classList.add('opacity-100', 'translate-y-0');
-            });
-        });
+        clearSelectedItem();
+        selectedItem = item;
+        selectedItem.style.outline = '3px solid rgba(56, 189, 248, 0.9)';
+        selectedItem.style.outlineOffset = '2px';
+        selectedItem.classList.add('scale-110', 'z-50');
+        setZoneCue(true);
+
+        showFeedback(
+            'Tarjeta seleccionada',
+            `Ubica "${item.dataset.label}" en la zona correcta.`,
+            'info'
+        );
+    }
+
+    function handleDropLogic(zoneElement, item) {
+        const entry = zones.find(z => z.id === zoneElement.id);
+        if (!entry) return;
+
+        zoneElement.classList.remove('ring-4', 'ring-white/40', 'scale-[1.02]');
+
+        item.classList.remove('opacity-50', 'scale-110', 'z-50');
+        item.style.outline = '';
+        item.style.outlineOffset = '';
+        item.style.position = '';
+        item.style.left = '';
+        item.style.top = '';
+        item.style.zIndex = '';
+        item.style.width = '';
+
+        setPlacedStyle(item, true);
+
+        const dropItems = zoneElement.querySelector('.drop-items');
+        if (dropItems) dropItems.appendChild(item);
+
+        tintLayer.style.background = entry.tint;
+        tintLayer.style.opacity = '1';
+        setTimeout(() => { tintLayer.style.opacity = '0'; }, 500);
+
+        const isCorrect = item.dataset.correctZone === entry.zone;
+        const colorClass = isCorrect ? 'bg-green-500/20' : 'bg-red-500/20';
+        zoneElement.classList.add(colorClass);
+        setTimeout(() => zoneElement.classList.remove(colorClass), 600);
+
+        recalculateState();
+        const title = isCorrect ? item.dataset.label : `Ajusta: ${item.dataset.label}`;
+        const impact = getKeyImpact(item.dataset.explanation);
+        const message = impact ? `Impacto clave: ${impact}.` : 'Revisa esta tarjeta y vuelve a intentar.';
+        showFeedback(title, message, isCorrect ? 'good' : 'bad');
+
+        if (selectedItem === item) selectedItem = null;
+        setZoneCue(false);
+        draggedItem = null;
     }
 
     items.forEach((item) => {
+        item.querySelectorAll('img').forEach((img) => {
+            img.draggable = false;
+            img.style.pointerEvents = 'none';
+            img.style.userSelect = 'none';
+            img.addEventListener('dragstart', (event) => event.preventDefault());
+        });
+
         item.addEventListener('dragstart', (event) => {
+            clearSelectedItem();
             draggedItem = item;
             item.classList.add('opacity-50', 'scale-110', 'z-50');
             setPlacedStyle(item, false);
-            event.dataTransfer.effectAllowed = 'move';
+            if (event.dataTransfer) {
+                event.dataTransfer.setData('text/plain', item.id || item.dataset.label || 'drag-item');
+                event.dataTransfer.effectAllowed = 'move';
+                event.dataTransfer.dropEffect = 'move';
+            }
+            setZoneCue(true);
         });
 
         item.addEventListener('dragend', () => {
@@ -1566,36 +1213,34 @@ function initDragDecideSimulator() {
                 draggedItem.classList.remove('opacity-50', 'scale-110', 'z-50');
             }
             draggedItem = null;
+            setZoneCue(false);
         });
 
-        // --- SOPORTE TÁCTIL (Móvil / F12) ---
         item.addEventListener('touchstart', (e) => {
-            if(e.cancelable) e.preventDefault(); // Evitar scroll mientras arrastras
+            if (e.cancelable) e.preventDefault();
+            clearSelectedItem();
             draggedItem = item;
-            
-            // Feedback visual inmediato
+
             item.classList.add('opacity-50', 'scale-110', 'z-50');
             setPlacedStyle(item, false);
 
-            // Calcular posición inicial para el arrastre
             const touch = e.touches[0];
             const rect = item.getBoundingClientRect();
             item.dataset.offsetX = touch.clientX - rect.left;
             item.dataset.offsetY = touch.clientY - rect.top;
-            
-            // Convertir a posición fija para que siga el dedo libremente
-            item.style.width = rect.width + 'px'; // Mantener ancho
+
+            item.style.width = rect.width + 'px';
             item.style.position = 'fixed';
             item.style.zIndex = '1000';
             item.style.left = (touch.clientX - item.dataset.offsetX) + 'px';
             item.style.top = (touch.clientY - item.dataset.offsetY) + 'px';
+            setZoneCue(true);
         }, { passive: false });
 
         item.addEventListener('touchmove', (e) => {
-            if(e.cancelable) e.preventDefault();
+            if (e.cancelable) e.preventDefault();
             if (!draggedItem) return;
             const touch = e.touches[0];
-            // Mover el elemento con el dedo
             item.style.left = (touch.clientX - item.dataset.offsetX) + 'px';
             item.style.top = (touch.clientY - item.dataset.offsetY) + 'px';
         }, { passive: false });
@@ -1603,18 +1248,16 @@ function initDragDecideSimulator() {
         item.addEventListener('touchend', (e) => {
             if (!draggedItem) return;
             const touch = e.changedTouches[0];
-            
-            // Ocultar brevemente para detectar qué hay debajo (la zona de drop)
+
             item.style.display = 'none';
             const target = document.elementFromPoint(touch.clientX, touch.clientY);
             item.style.display = '';
-            
+
             const zoneElement = target ? target.closest('.drop-zone') : null;
-            
+
             if (zoneElement) {
                 handleDropLogic(zoneElement, draggedItem);
             } else {
-                // Si no se soltó en una zona, resetear estilos
                 item.style.position = '';
                 item.style.left = '';
                 item.style.top = '';
@@ -1622,7 +1265,13 @@ function initDragDecideSimulator() {
                 item.style.width = '';
                 item.classList.remove('opacity-50', 'scale-110', 'z-50');
                 draggedItem = null;
+                setZoneCue(false);
             }
+        });
+
+        item.addEventListener('click', () => {
+            if (draggedItem) return;
+            selectItemForClickDrop(item);
         });
     });
 
@@ -1632,6 +1281,7 @@ function initDragDecideSimulator() {
 
         zoneElement.addEventListener('dragover', (event) => {
             event.preventDefault();
+            if (event.dataTransfer) event.dataTransfer.dropEffect = 'move';
             zoneElement.classList.add('ring-4', 'ring-white/40', 'scale-[1.02]');
         });
 
@@ -1644,20 +1294,33 @@ function initDragDecideSimulator() {
             if (!draggedItem) return;
             handleDropLogic(zoneElement, draggedItem);
         });
+
+        zoneElement.addEventListener('click', () => {
+            if (!selectedItem || draggedItem) return;
+            handleDropLogic(zoneElement, selectedItem);
+        });
     });
 
     if (resetButton) {
         resetButton.addEventListener('click', () => {
             score = 0;
+            finalResultShown = false;
+            clearSelectedItem();
+            setZoneCue(false);
+
             initialOrder.forEach((item) => {
                 initialItemsParent.appendChild(item);
                 setPlacedStyle(item, false);
             });
-            
-            feedback.classList.add('hidden');
+
             recalculateState();
+            showFeedback(
+                'Actividad reiniciada',
+                'Las tarjetas volvieron a su posición inicial.',
+                'info'
+            );
         });
     }
-    
+
     recalculateState();
 }

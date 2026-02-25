@@ -23,6 +23,16 @@ body {
     background-color: #38bdf8;
 }
 
+/* Scrollbar personalizado para contenedores internos (Leaderboard) */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    border: none;
+}
+
 /* Color de selección de texto (Efecto Bioluminiscente) */
 ::selection {
     background: #38bdf8;
@@ -60,6 +70,12 @@ html {
     50% { transform: translate(0, -10px); }
     75% { transform: translate(-4px, -6px); }
     100% { transform: translate(0, 0); }
+}
+
+/* Animación Shimmer para el Host Screen */
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
 }
 
 /* Estilos para iconos sociales */
@@ -232,6 +248,7 @@ html {
 .leaflet-popup-close-button {
     color: #e2e8f0 !important;
     padding: 8px 8px 0 0 !important;
+    font-size: 24px !important;
 }
 .leaflet-popup-close-button:hover {
     background-color: transparent !important;
@@ -368,4 +385,57 @@ html {
 
 .filter-chip .material-symbols-outlined {
     font-size: 20px;
+}
+
+/* --- ESPECIES: DISTRIBUCION ALTERNADA --- */
+@media (min-width: 768px) {
+    .species-layout-alt .species-card {
+        flex-direction: row;
+        height: 22.5rem;
+        min-height: 22.5rem;
+        align-items: stretch;
+    }
+
+    .species-layout-alt .species-card:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+
+    .species-layout-alt .species-card > .h-72 {
+        width: 39%;
+        min-height: 22.5rem;
+        height: auto !important;
+        align-self: stretch;
+    }
+
+    .species-layout-alt .species-card > .p-6 {
+        width: 61%;
+        padding: 1.2rem !important;
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        align-content: start;
+    }
+
+    .species-layout-alt .species-card > .p-6 > * + * {
+        margin-top: 0.75rem !important;
+    }
+
+    .species-layout-alt .species-card > .p-6 .mt-auto {
+        margin-top: auto !important;
+        padding-top: 0.4rem !important;
+    }
+
+    .species-layout-alt .species-card > .h-72 img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .species-layout-alt .species-card .relative.pl-4 .leading-relaxed {
+        line-height: 1.45;
+    }
+
+    .species-layout-alt .species-card .mt-auto .rounded-2xl {
+        padding: 0.9rem !important;
+        min-height: 9.4rem;
+    }
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/img/logo.png" type="image/png">
-    <title>Atlas de Consecuencias</title>
+    <title>Zonas de Impacto</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../assets/js/tailwind-config.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -63,7 +63,7 @@
                     <span class="material-symbols-outlined text-lg">warning</span> Impacto
                 </a>
                 <a href="atlas.html" class="nav-flash active-nav flex items-center gap-2 px-4 py-3 text-sm font-medium text-slate-300 hover:text-white transition-all rounded-full">
-                    <span class="material-symbols-outlined text-lg">analytics</span> Atlas
+                    <span class="material-symbols-outlined text-lg">analytics</span> Zonas
                 </a>
                 <a href="especies.html" class="nav-flash flex items-center gap-2 px-4 py-3 text-sm font-medium text-slate-300 hover:text-white transition-all rounded-full">
                     <span class="material-symbols-outlined text-lg">pets</span> Especies
@@ -89,7 +89,7 @@
                 <span class="material-symbols-outlined">warning</span> Impacto
             </a>
             <a href="atlas.html" class="nav-flash active-nav flex items-center gap-3 text-slate-300 hover:text-white px-4 py-3 rounded-xl transition-all text-sm font-medium">
-                <span class="material-symbols-outlined">analytics</span> Atlas
+                <span class="material-symbols-outlined">analytics</span> Zonas
             </a>
             <a href="especies.html" class="nav-flash flex items-center gap-3 text-slate-300 hover:text-white px-4 py-3 rounded-xl transition-all text-sm font-medium">
                 <span class="material-symbols-outlined">pets</span> Especies
@@ -111,459 +111,130 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <span class="text-primary font-bold tracking-widest uppercase text-xs">Análisis Técnico Detallado</span>
-                <h1 class="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter mt-4 mb-8">Atlas de Panamá Marino</h1>
+                <h1 class="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter mt-4 mb-8">Zonas Marinas de Panamá</h1>
                 <p class="text-xl text-slate-200 max-w-2xl mx-auto">Mapa interactivo de los ecosistemas marinos de Panamá. También descubrirás sus principales consecuencias ambientales y datos clave para comprender la importancia del país y su impacto.</p>
             </div>
 
             <!-- Mapa Interactivo de Panamá -->
-            <div class="glass-card p-4 md:p-8 rounded-3xl md:rounded-[3rem] mb-10 md:mb-16">
-                <h3 class="text-2xl font-bold mb-6 text-primary flex items-center gap-3">
-                    <span class="material-symbols-outlined text-3xl">map</span> Mapa Interactivo de Ecosistemas Marinos
-                </h3>
-                <div id="panama-map" class="w-full h-96 rounded-2xl mb-4"></div>
-                <p class="text-slate-400 text-sm">Explora los arrecifes de coral, manglares y zonas protegidas de Panamá. Haz clic en los marcadores para obtener información detallada.</p>
+            <div class="glass-card p-2 md:p-3 rounded-3xl md:rounded-[3rem] mb-10 md:mb-16">
+                <div class="px-4 pt-4 pb-2 md:px-6 md:pt-6">
+                    <h3 class="text-2xl font-bold text-primary flex items-center gap-3">
+                        <span class="material-symbols-outlined text-3xl">map</span> Mapa Interactivo de Ecosistemas Marinos
+                    </h3>
+                </div>
+                <div id="panama-map" class="w-full h-[500px] md:h-[700px] rounded-[2rem] mt-2 mb-2"></div>
+                <div class="px-4 pb-4 md:px-6 md:pb-6">
+                    <p class="text-slate-400 text-sm">Explora los arrecifes de coral, manglares y zonas protegidas de Panamá. Haz clic en los marcadores para obtener información detallada.</p>
+                </div>
             </div>
-
+            <!-- Consecuencias Ambientales -->
             <div class="glass-card p-5 md:p-8 rounded-3xl md:rounded-[3rem] mb-10 md:mb-16">
                 <h3 class="text-2xl font-bold mb-8 text-coral-glow flex items-center gap-3">
-                    <span class="material-symbols-outlined text-3xl">warning</span> Consecuencias Ambientales
+                    <span class="material-symbols-outlined text-3xl">travel_explore</span> Zonas Críticas y sus Desafíos
                 </h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 consequences-grid items-start">
                     <article class="glass-card rounded-2xl overflow-hidden transition-colors hover:bg-white/5">
                         <button class="consequence-btn w-full p-6 text-left flex items-center justify-between gap-4 group">
-                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-coral-glow text-2xl">delete</span> Impactos de la contaminación</h4>
+                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-coral-glow text-2xl">water_drop</span> Bocas del Toro</h4>
                             <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron">expand_more</span>
                         </button>
                         <div class="consequence-content hidden px-6 pb-6">
                             <p class="text-slate-200 text-sm leading-relaxed border-t border-white/10 pt-4">
-                            Los residuos plásticos, aguas residuales y derrames contaminan hábitats clave.
-                            Esta presión degrada ecosistemas costeros y altera el equilibrio natural del mar.
+                            <strong>El desafío del turismo masivo:</strong> La falta de alcantarillado adecuado provoca la descarga de aguas residuales sin tratamiento directamente al mar. Esto eleva los nutrientes (eutrofización), asfixiando los arrecifes de coral con algas, mientras que la basura turística mal gestionada se acumula en los manglares.
                             </p>
                         </div>
                     </article>
                     <article class="glass-card rounded-2xl overflow-hidden transition-colors hover:bg-white/5">
                         <button class="consequence-btn w-full p-6 text-left flex items-center justify-between gap-4 group">
-                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-primary text-2xl">phishing</span> Vida marina afectada</h4>
+                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-primary text-2xl">location_city</span> Bahía de Panamá</h4>
                             <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron">expand_more</span>
                         </button>
                         <div class="consequence-content hidden px-6 pb-6">
                             <p class="text-slate-200 text-sm leading-relaxed border-t border-white/10 pt-4">
-                            Peces, corales y manglares sufren daños directos por basura, químicos y cambios de temperatura.
-                            Como resultado, disminuye la biodiversidad y se debilitan las cadenas alimenticias marinas.
+                            <strong>La huella urbana:</strong> Ríos como el Juan Díaz y el Matasnillo actúan como cintas transportadoras de basura desde la ciudad hasta el humedal. Toneladas de plásticos de un solo uso quedan atrapadas en las raíces de los manglares, bloqueando su intercambio de oxígeno y degradando el hábitat de aves migratorias.
                             </p>
                         </div>
                     </article>
                     <article class="glass-card rounded-2xl overflow-hidden transition-colors hover:bg-white/5">
                         <button class="consequence-btn w-full p-6 text-left flex items-center justify-between gap-4 group">
-                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-coral-glow text-2xl">groups</span> Impacto en el ser humano</h4>
+                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-coral-glow text-2xl">public</span> Guna Yala</h4>
                             <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron">expand_more</span>
                         </button>
                         <div class="consequence-content hidden px-6 pb-6">
                             <p class="text-slate-200 text-sm leading-relaxed border-t border-white/10 pt-4">
-                            La contaminación marina afecta la alimentación, la salud y la economía local.
-                            También reduce ingresos por pesca y turismo, impactando comunidades costeras.
+                            <strong>Basura sin fronteras:</strong> Los vientos alisios y las corrientes del Caribe arrastran desechos plásticos internacionales hacia el archipiélago. Esto, sumado a la falta de espacio para vertederos en las islas, crea una crisis de acumulación que amenaza la salud comunitaria y la pesca de subsistencia.
                             </p>
                         </div>
                     </article>
                     <article class="glass-card rounded-2xl overflow-hidden transition-colors hover:bg-white/5">
                         <button class="consequence-btn w-full p-6 text-left flex items-center justify-between gap-4 group">
-                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-primary text-2xl">water_drop</span> Pérdida de oxígeno</h4>
+                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-primary text-2xl">scuba_diving</span> Parque Nacional Coiba</h4>
                             <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron">expand_more</span>
                         </button>
                         <div class="consequence-content hidden px-6 pb-6">
                             <p class="text-slate-200 text-sm leading-relaxed border-t border-white/10 pt-4">
-                            El exceso de residuos orgánicos puede generar zonas con poco oxígeno.
-                            Esto provoca estrés y mortalidad en peces, moluscos y otras especies sensibles.
+                            <strong>Amenazas a la deriva:</strong> A pesar de su aislamiento, las corrientes marinas depositan basura continental en sus costas. Además, las "redes fantasma" abandonadas por la pesca ilegal en zonas limítrofes derivan hacia el parque, atrapando fauna marina indefinidamente.
                             </p>
                         </div>
                     </article>
                     <article class="glass-card rounded-2xl overflow-hidden transition-colors hover:bg-white/5">
                         <button class="consequence-btn w-full p-6 text-left flex items-center justify-between gap-4 group">
-                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-coral-glow text-2xl">waves</span> Deterioro de arrecifes</h4>
+                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-coral-glow text-2xl">directions_boat</span> Colón y Punta Galeta</h4>
                             <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron">expand_more</span>
                         </button>
                         <div class="consequence-content hidden px-6 pb-6">
                             <p class="text-slate-200 text-sm leading-relaxed border-t border-white/10 pt-4">
-                            La contaminación y el calentamiento debilitan los corales y favorecen su blanqueamiento.
-                            Cuando el arrecife se degrada, disminuye la protección natural de la costa.
+                            <strong>Presión industrial:</strong> La intensa actividad portuaria y la cercanía a la entrada del Canal generan riesgos constantes de derrames de hidrocarburos y químicos. A esto se suma la basura urbana de la ciudad de Colón, que termina sofocando los manglares y arrecifes de Punta Galeta.
                             </p>
                         </div>
                     </article>
                     <article class="glass-card rounded-2xl overflow-hidden transition-colors hover:bg-white/5">
                         <button class="consequence-btn w-full p-6 text-left flex items-center justify-between gap-4 group">
-                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-primary text-2xl">home_pin</span> Riesgo para comunidades</h4>
+                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-primary text-2xl">sailing</span> Archipiélago de las Perlas</h4>
                             <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron">expand_more</span>
                         </button>
                         <div class="consequence-content hidden px-6 pb-6">
                             <p class="text-slate-200 text-sm leading-relaxed border-t border-white/10 pt-4">
-                            Menos manglares y arrecifes saludables significan menor barrera frente a tormentas.
-                            Esto aumenta daños en viviendas, infraestructura y actividades económicas locales.
-                            </p>
-                        </div>
-                    </article>
-                    <article class="glass-card rounded-2xl overflow-hidden transition-colors hover:bg-white/5">
-                        <button class="consequence-btn w-full p-6 text-left flex items-center justify-between gap-4 group">
-                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-coral-glow text-2xl">warning</span> Bioacumulación de tóxicos</h4>
-                            <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron">expand_more</span>
-                        </button>
-                        <div class="consequence-content hidden px-6 pb-6">
-                            <p class="text-slate-200 text-sm leading-relaxed border-t border-white/10 pt-4">
-                            Sustancias contaminantes pueden acumularse en peces y mariscos a lo largo de la cadena alimentaria.
-                            Esto incrementa riesgos para la fauna marina y para el consumo humano.
-                            </p>
-                        </div>
-                    </article>
-                    <article class="glass-card rounded-2xl overflow-hidden transition-colors hover:bg-white/5">
-                        <button class="consequence-btn w-full p-6 text-left flex items-center justify-between gap-4 group">
-                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-primary text-2xl">beach_access</span> Afectación del turismo</h4>
-                            <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron">expand_more</span>
-                        </button>
-                        <div class="consequence-content hidden px-6 pb-6">
-                            <p class="text-slate-200 text-sm leading-relaxed border-t border-white/10 pt-4">
-                            Playas y aguas contaminadas reducen el atractivo turístico de zonas costeras.
-                            Como consecuencia, disminuyen ingresos y oportunidades para comunidades locales.
-                            </p>
-                        </div>
-                    </article>
-                    <article class="glass-card rounded-2xl overflow-hidden transition-colors hover:bg-white/5">
-                        <button class="consequence-btn w-full p-6 text-left flex items-center justify-between gap-4 group">
-                            <h4 class="text-lg font-bold text-white flex items-center gap-3"><span class="material-symbols-outlined text-coral-glow text-2xl">sync</span> Alteración de ciclos</h4>
-                            <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 chevron">expand_more</span>
-                        </button>
-                        <div class="consequence-content hidden px-6 pb-6">
-                            <p class="text-slate-200 text-sm leading-relaxed border-t border-white/10 pt-4">
-                            El ruido, la contaminación química y los microplásticos pueden afectar reproducción y desarrollo.
-                            Esto compromete la recuperación natural de poblaciones marinas.
+                            <strong>Turismo y navegación:</strong> El aumento del tráfico de embarcaciones de recreo genera contaminación por combustibles y residuos sólidos. Estos desechos llegan a playas críticas para la anidación de tortugas, afectando su ciclo reproductivo y la calidad del agua.
                             </p>
                         </div>
                     </article>
                 </div>
             </div>
 
+            <!-- Datos curiosos -->
             <div class="glass-card p-5 md:p-8 rounded-3xl md:rounded-[3rem] mb-10 md:mb-16">
                 <h3 class="text-2xl font-bold mb-8 text-primary flex items-center gap-3">
-                    <span class="material-symbols-outlined text-3xl">lightbulb</span> Datos curiosos / ¿Sabías que...?
+                    <span class="material-symbols-outlined text-3xl">lightbulb</span> Datos curiosos
                 </h3>
                 
                 <!-- Tarjetas de Datos Curiosos (Rediseñadas para lectura inmediata) -->
                 <div class="grid md:grid-cols-3 gap-6 mb-12">
                     <article class="glass-card rounded-3xl p-6 relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
                         <div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-colors"></div>
-                        <span class="material-symbols-outlined text-4xl text-primary mb-4">recycling</span>
-                        <h4 class="font-bold text-lg text-white mb-3 leading-tight">14 millones de toneladas</h4>
+                        <span class="material-symbols-outlined text-4xl text-primary mb-4">public</span>
+                        <h4 class="font-bold text-lg text-white mb-3 leading-tight">Coiba: Patrimonio Mundial</h4>
                         <p class="text-slate-300 text-sm leading-relaxed">
-                            Es la cantidad de plástico que llega al océano cada año. Equivale a vaciar un camión de basura en el mar cada minuto.
-                        </p>
-                    </article>
-                    <article class="glass-card rounded-3xl p-6 relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
-                        <div class="absolute -right-4 -top-4 w-24 h-24 bg-coral-glow/10 rounded-full blur-2xl group-hover:bg-coral-glow/20 transition-colors"></div>
-                        <span class="material-symbols-outlined text-4xl text-coral-glow mb-4">pets</span>
-                        <h4 class="font-bold text-lg text-white mb-3 leading-tight">100,000 animales</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed">
-                            Mueren anualmente por enredos en redes de pesca abandonadas y plásticos. Tortugas y aves son las más afectadas.
+                            Es la isla más grande del Pacífico centroamericano. Su protección es clave para la migración de ballenas y tiburones en el Corredor Marino.
                         </p>
                     </article>
                     <article class="glass-card rounded-3xl p-6 relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
                         <div class="absolute -right-4 -top-4 w-24 h-24 bg-green-400/10 rounded-full blur-2xl group-hover:bg-green-400/20 transition-colors"></div>
-                        <span class="material-symbols-outlined text-4xl text-green-400 mb-4">restaurant</span>
-                        <h4 class="font-bold text-lg text-white mb-3 leading-tight">Microplásticos en el menú</h4>
+                        <span class="material-symbols-outlined text-4xl text-green-400 mb-4">flight_takeoff</span>
+                        <h4 class="font-bold text-lg text-white mb-3 leading-tight">Millones de viajeros</h4>
                         <p class="text-slate-300 text-sm leading-relaxed">
-                            Los peces confunden partículas de plástico con alimento. Esto reduce su crecimiento y entra en nuestra cadena alimentaria.
+                            Los humedales de la Bahía de Panamá son vitales para 2 millones de aves playeras migratorias cada año, a pesar de la presión urbana.
+                        </p>
+                    </article>
+                    <article class="glass-card rounded-3xl p-6 relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+                        <div class="absolute -right-4 -top-4 w-24 h-24 bg-coral-glow/10 rounded-full blur-2xl group-hover:bg-coral-glow/20 transition-colors"></div>
+                        <span class="material-symbols-outlined text-4xl text-coral-glow mb-4">scuba_diving</span>
+                        <h4 class="font-bold text-lg text-white mb-3 leading-tight">El 95% de los corales</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Bocas del Toro concentra casi toda la diversidad de coral del Caribe panameño. Un tesoro de biodiversidad bajo amenaza turística.
                         </p>
                     </article>
                 </div>
-
-                <!-- Galería Visual Mejorada (Siempre visible) -->
-                <div id="visual-examples-panel" class="mt-8 pt-8 border-t border-white/10">
-                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary">photo_library</span> Galería de Evidencia
-                    </h3>
-                    
-                    <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 px-4">
-                        <button class="visual-filter-btn px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-base rounded-full border border-coral-glow text-coral-glow hover:bg-coral-glow/20 transition-all" data-filter="contaminacion">Contaminación</button>
-                        <button class="visual-filter-btn px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-base rounded-full border border-primary text-primary hover:bg-primary/20 transition-all" data-filter="saludable">Ecosistemas saludables</button>
-                        <button class="visual-filter-btn px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-base rounded-full border border-white/30 text-slate-200 hover:bg-white/10 transition-all bg-white/10" data-filter="todos">Ver todo</button>
-                    </div>
-
-                    <div class="relative mb-6">
-                        <!-- Botones de navegación -->
-                        <button id="visual-prev" class="absolute left-0 md:-left-12 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-12 md:h-12 rounded-full bg-black/70 border border-white/30 text-white hover:bg-primary hover:text-deep-abyss transition-all shadow-xl flex items-center justify-center">
-                            <span class="material-symbols-outlined text-xl md:text-3xl">chevron_left</span>
-                        </button>
-                        <button id="visual-next" class="absolute right-0 md:-right-12 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-12 md:h-12 rounded-full bg-black/70 border border-white/30 text-white hover:bg-primary hover:text-deep-abyss transition-all shadow-xl flex items-center justify-center">
-                            <span class="material-symbols-outlined text-xl md:text-3xl">chevron_right</span>
-                        </button>
-
-                    <div id="visual-carousel" class="flex gap-4 md:gap-6 overflow-x-hidden pb-4 w-full max-w-[1180px] mx-auto">
-                        <article class="visual-card shrink-0 w-[45vw] md:w-[320px] bg-black/25 border border-white/10 rounded-2xl overflow-hidden transition-colors group" data-group="contaminacion">
-                            <div class="relative h-32 md:h-48 overflow-hidden">
-                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Plastic_trash_on_the_beach.jpg" alt="Residuos plásticos en playa" class="w-full h-52 object-cover">
-                            </div>
-                            <div class="p-3 md:p-4">
-                                <h4 class="font-bold text-white mb-1 md:mb-2 text-sm md:text-base leading-tight">Residuos en playas</h4>
-                                <p class="text-xs md:text-sm text-slate-200 leading-snug">La basura mal gestionada llega al mar por ríos y desagües urbanos.</p>
-                            </div>
-                        </article>
-                        <article class="visual-card shrink-0 w-[45vw] md:w-[320px] bg-black/25 border border-white/10 rounded-2xl overflow-hidden transition-colors group" data-group="contaminacion">
-                            <div class="relative h-32 md:h-48 overflow-hidden">
-                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Beach_strewn_with_plastic_debris_(8080500982).jpg" alt="Plásticos acumulados en zona costera" class="w-full h-52 object-cover">
-                            </div>
-                            <div class="p-3 md:p-4">
-                                <h4 class="font-bold text-white mb-1 md:mb-2 text-sm md:text-base leading-tight">Acumulación de desechos</h4>
-                                <p class="text-xs md:text-sm text-slate-200 leading-snug">Los residuos flotantes se concentran en costas y afectan hábitats críticos.</p>
-                            </div>
-                        </article>
-                        <article class="visual-card shrink-0 w-[45vw] md:w-[320px] bg-black/25 border border-white/10 rounded-2xl overflow-hidden transition-colors group" data-group="contaminacion">
-                            <div class="relative h-32 md:h-48 overflow-hidden">
-                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Plastic_Pollution_in_Santa_Luzia,_Cape_Verde.jpg" alt="Contaminación por plásticos en litoral" class="w-full h-52 object-cover">
-                            </div>
-                            <div class="p-3 md:p-4">
-                                <h4 class="font-bold text-white mb-1 md:mb-2 text-sm md:text-base leading-tight">Impacto por actividades humanas</h4>
-                                <p class="text-xs md:text-sm text-slate-200 leading-snug">La actividad pesquera y el consumo de plástico aumentan la presión ambiental.</p>
-                            </div>
-                        </article>
-                        <article class="visual-card shrink-0 w-[45vw] md:w-[320px] bg-black/25 border border-white/10 rounded-2xl overflow-hidden transition-colors group" data-group="contaminacion">
-                            <div class="relative h-32 md:h-48 overflow-hidden">
-                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Derelict_Fishing_Nets_(32651155722).jpg" alt="Redes de pesca abandonadas" class="w-full h-52 object-cover">
-                            </div>
-                            <div class="p-3 md:p-4">
-                                <h4 class="font-bold text-white mb-1 md:mb-2 text-sm md:text-base leading-tight">Redes fantasma</h4>
-                                <p class="text-xs md:text-sm text-slate-200 leading-snug">Las redes abandonadas siguen atrapando especies y degradando hábitats marinos.</p>
-                            </div>
-                        </article>
-                        <article class="visual-card shrink-0 w-[45vw] md:w-[320px] bg-black/25 border border-white/10 rounded-2xl overflow-hidden transition-colors group" data-group="contaminacion">
-                            <div class="relative h-32 md:h-48 overflow-hidden">
-                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Aluminium_Can_Degrading_in_Environment.jpg" alt="Lata contaminando el entorno" class="w-full h-52 object-cover">
-                            </div>
-                            <div class="p-3 md:p-4">
-                                <h4 class="font-bold text-white mb-1 md:mb-2 text-sm md:text-base leading-tight">Residuos metálicos</h4>
-                                <p class="text-xs md:text-sm text-slate-200 leading-snug">Los desechos como latas deterioran el paisaje costero y pueden afectar fauna.</p>
-                            </div>
-                        </article>
-                        <article class="visual-card shrink-0 w-[45vw] md:w-[320px] bg-black/25 border border-white/10 rounded-2xl overflow-hidden transition-colors group" data-group="contaminacion">
-                            <div class="relative h-32 md:h-48 overflow-hidden">
-                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Plastic_bag_in_a_water_canal_and_a_cloudy_sky_in_the_background_(51148269478).jpg" alt="Bolsa plástica en canal de agua" class="w-full h-52 object-cover">
-                            </div>
-                            <div class="p-3 md:p-4">
-                                <h4 class="font-bold text-white mb-1 md:mb-2 text-sm md:text-base leading-tight">Basura en vías fluviales</h4>
-                                <p class="text-xs md:text-sm text-slate-200 leading-snug">La contaminación en canales y ríos termina llegando al mar y sus ecosistemas.</p>
-                            </div>
-                        </article>
-                        <article class="visual-card shrink-0 w-[45vw] md:w-[320px] bg-black/25 border border-white/10 rounded-2xl overflow-hidden transition-colors group" data-group="saludable">
-                            <div class="relative h-32 md:h-48 overflow-hidden">
-                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Healthy_corals.jpg" alt="Arrecife saludable" class="w-full h-52 object-cover">
-                            </div>
-                            <div class="p-3 md:p-4">
-                                <h4 class="font-bold text-white mb-1 md:mb-2 text-sm md:text-base leading-tight">Arrecifes saludables</h4>
-                                <p class="text-xs md:text-sm text-slate-200 leading-snug">Un arrecife sano protege la costa y sostiene gran biodiversidad.</p>
-                            </div>
-                        </article>
-                        <article class="visual-card shrink-0 w-[45vw] md:w-[320px] bg-black/25 border border-white/10 rounded-2xl overflow-hidden transition-colors group" data-group="saludable">
-                            <div class="relative h-32 md:h-48 overflow-hidden">
-                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mangrove_forests,_Wandoor.jpg" alt="Bosque de manglar conservado" class="w-full h-52 object-cover">
-                            </div>
-                            <div class="p-3 md:p-4">
-                                <h4 class="font-bold text-white mb-1 md:mb-2 text-sm md:text-base leading-tight">Manglares conservados</h4>
-                                <p class="text-xs md:text-sm text-slate-200 leading-snug">Los manglares reducen erosión y sirven de vivero para especies marinas.</p>
-                            </div>
-                        </article>
-                        <article class="visual-card shrink-0 w-[45vw] md:w-[320px] bg-black/25 border border-white/10 rounded-2xl overflow-hidden transition-colors group" data-group="saludable">
-                            <div class="relative h-32 md:h-48 overflow-hidden">
-                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coral_Reef_Fish_(46256603521).jpg" alt="Fauna marina en arrecife" class="w-full h-52 object-cover">
-                            </div>
-                            <div class="p-3 md:p-4">
-                                <h4 class="font-bold text-white mb-1 md:mb-2 text-sm md:text-base leading-tight">Fauna en equilibrio</h4>
-                                <p class="text-xs md:text-sm text-slate-200 leading-snug">La diversidad de peces es indicador de ecosistemas marinos funcionales.</p>
-                            </div>
-                        </article>
-                        <article class="visual-card shrink-0 w-[45vw] md:w-[320px] bg-black/25 border border-white/10 rounded-2xl overflow-hidden transition-colors group" data-group="saludable">
-                            <div class="relative h-32 md:h-48 overflow-hidden">
-                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Seagrass_1.jpg" alt="Praderas marinas saludables" class="w-full h-52 object-cover">
-                            </div>
-                            <div class="p-3 md:p-4">
-                                <h4 class="font-bold text-white mb-1 md:mb-2 text-sm md:text-base leading-tight">Praderas marinas</h4>
-                                <p class="text-xs md:text-sm text-slate-200 leading-snug">Las praderas marinas almacenan carbono y sostienen vida marina juvenil.</p>
-                            </div>
-                        </article>
-                        <article class="visual-card shrink-0 w-[45vw] md:w-[320px] bg-black/25 border border-white/10 rounded-2xl overflow-hidden transition-colors group" data-group="saludable">
-                            <div class="relative h-32 md:h-48 overflow-hidden">
-                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coral_Reef_(6224693626).jpg" alt="Ecosistema de arrecife conservado" class="w-full h-52 object-cover">
-                            </div>
-                            <div class="p-3 md:p-4">
-                                <h4 class="font-bold text-white mb-1 md:mb-2 text-sm md:text-base leading-tight">Ecosistema conservado</h4>
-                                <p class="text-xs md:text-sm text-slate-200 leading-snug">Zonas marinas protegidas favorecen recuperación y resiliencia ecológica.</p>
-                            </div>
-                        </article>
-                        <article class="visual-card shrink-0 w-[45vw] md:w-[320px] bg-black/25 border border-white/10 rounded-2xl overflow-hidden transition-colors group" data-group="saludable">
-                            <div class="relative h-32 md:h-48 overflow-hidden">
-                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mangrove_forest_(5747972952).jpg" alt="Manglar saludable" class="w-full h-52 object-cover">
-                            </div>
-                            <div class="p-3 md:p-4">
-                                <h4 class="font-bold text-white mb-1 md:mb-2 text-sm md:text-base leading-tight">Manglar saludable</h4>
-                                <p class="text-xs md:text-sm text-slate-200 leading-snug">Los manglares sanos protegen la costa y sostienen múltiples especies.</p>
-                            </div>
-                        </article>
-                    </div>
-                    </div>
-
-                    <div class="grid md:grid-cols-3 gap-4">
-                        <div class="mini-info-card bg-black/20 border border-white/10 rounded-xl p-4">
-                            <h5 class="font-bold text-primary mb-1">Contaminación visible</h5>
-                            <p class="text-sm text-slate-200">Plásticos y redes abandonadas dañan fauna y paisaje costero.</p>
-                        </div>
-                        <div class="mini-info-card bg-black/20 border border-white/10 rounded-xl p-4">
-                            <h5 class="font-bold text-primary mb-1">Ecosistemas resilientes</h5>
-                            <p class="text-sm text-slate-200">Arrecifes y manglares sanos mejoran protección natural y productividad.</p>
-                        </div>
-                        <div class="mini-info-card bg-black/20 border border-white/10 rounded-xl p-4">
-                            <h5 class="font-bold text-primary mb-1">Acción comunitaria</h5>
-                            <p class="text-sm text-slate-200">Reducción de residuos y limpiezas locales generan cambios medibles.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-12 mb-16">
-                <!-- Estadísticas de Panamá -->
-                <div class="glass-card p-5 md:p-8 rounded-3xl md:rounded-[3rem]">
-                    <h3 class="text-2xl font-bold mb-6 text-primary flex items-center gap-3">
-                        <span class="material-symbols-outlined text-3xl">analytics</span> Estadísticas de Panamá
-                    </h3>
-                    <div class="relative h-64 md:h-80 w-full mb-4">
-                        <canvas id="panamaStats"></canvas>
-                    </div>
-                    <p class="text-slate-400 text-sm">Número estimado de especies en arrecifes de coral, manglares, especies marinas y especies protegidas en Panamá.</p>
-                    <p class="text-slate-300 text-xs mt-2">
-                        Fuente: Ministerio de Ambiente de Panamá (MiAMBIENTE)
-                    </p>
-                    <details class="mt-4 group">
-                        <summary class="cursor-pointer text-primary text-sm font-bold flex items-center gap-2 hover:text-white transition-colors select-none">
-                            Ver especies clave <span class="material-symbols-outlined text-lg group-open:rotate-180 transition-transform">expand_more</span>
-                        </summary>
-                        <div class="mt-3 text-sm text-slate-300 space-y-2 pl-2 border-l-2 border-primary/30">
-                            <p><strong class="text-white">Corales:</strong> Cuerno de alce (<i>Acropora palmata</i>), Coral Cerebro.</p>
-                            <p><strong class="text-white">Megafauna:</strong> Ballena Jorobada, Tortuga Carey, Tiburón Martillo.</p>
-                            <p><strong class="text-white">Manglares:</strong> Mangle Rojo (costa), Mangle Negro.</p>
-                        </div>
-                    </details>
-                    <!-- Botón a la nueva sección de Especies -->
-                    <div class="mt-6 pt-6 border-t border-white/10 text-center">
-                        <a href="especies.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 border border-primary/30 text-primary font-bold hover:bg-primary hover:text-deep-abyss transition-all group">
-                            Explorar Catálogo de Especies
-                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Zonas Protegidas -->
-                <div class="glass-card p-5 md:p-8 rounded-3xl md:rounded-[3rem]">
-                    <h3 class="text-2xl font-bold mb-6 text-coral-glow flex items-center gap-3">
-                        <span class="material-symbols-outlined text-3xl">shield</span> Áreas Protegidas
-                    </h3>
-                    <div class="relative h-64 md:h-80 w-full mb-4">
-                        <canvas id="protectedAreas"></canvas>
-                    </div>
-                    <p class="text-slate-400 text-sm">Distribución de parques nacionales marinos y zonas de conservación en Panamá.</p>
-                    <p class="text-slate-300 text-xs mt-2">
-                        Fuente: Ministerio de Ambiente de Panamá (MiAMBIENTE)
-                    </p>
-                    <details class="mt-4 group">
-                        <summary class="cursor-pointer text-coral-glow text-sm font-bold flex items-center gap-2 hover:text-white transition-colors select-none">
-                            Ver zonas destacadas <span class="material-symbols-outlined text-lg group-open:rotate-180 transition-transform">expand_more</span>
-                        </summary>
-                        <div class="mt-3 text-sm text-slate-300 space-y-2 pl-2 border-l-2 border-coral-glow/30">
-                            <p><strong class="text-white">Protegidas (Clave):</strong> P.N. Coiba (UNESCO), Cordillera de Coiba, P.N. Isla Bastimentos.</p>
-                            <p><strong class="text-white">Vulnerables:</strong> Bahía de Panamá (presión urbana), Archipiélago de las Perlas (turismo).</p>
-                        </div>
-                    </details>
-                </div>
-            </div>
-
-                        <!-- Información Adicional -->
-            <div class="grid md:grid-cols-2 gap-12">
-                <article class="glass-card rounded-3xl md:rounded-[2.2rem] overflow-hidden flex flex-col h-full group hover:shadow-[0_0_40px_rgba(56,189,248,0.2)] transition-all duration-500">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://pancanal.com/wp-content/uploads/2021/10/canal_atardecer-scaled.jpg" alt="Canal de Panamá" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-deep-abyss via-transparent to-transparent"></div>
-                    </div>
-                    <div class="p-7 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-bold mb-5 text-primary flex items-center gap-2">
-                            <span class="material-symbols-outlined">info</span> Datos Clave de Panamá
-                        </h3>
-                        
-                        <div class="grid grid-cols-2 gap-3 mb-4">
-                            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center hover:bg-white/10 transition-colors group/item">
-                                <span class="material-symbols-outlined text-primary text-3xl mb-2 group-hover/item:scale-110 transition-transform">water</span>
-                                <div class="text-2xl font-black text-white tracking-tight">+2,400 km</div>
-                                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Costas</div>
-                            </div>
-                            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center hover:bg-white/10 transition-colors group/item">
-                                <span class="material-symbols-outlined text-primary text-3xl mb-2 group-hover/item:scale-110 transition-transform">landscape</span>
-                                <div class="text-2xl font-black text-white tracking-tight">1,520</div>
-                                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Islas</div>
-                            </div>
-                            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center hover:bg-white/10 transition-colors group/item">
-                                <span class="material-symbols-outlined text-primary text-3xl mb-2 group-hover/item:scale-110 transition-transform">directions_boat</span>
-                                <div class="text-2xl font-black text-white tracking-tight">5%</div>
-                                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Comercio Mundial</div>
-                            </div>
-                            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center hover:bg-white/10 transition-colors group/item">
-                                <span class="material-symbols-outlined text-primary text-3xl mb-2 group-hover/item:scale-110 transition-transform">public</span>
-                                <div class="text-lg font-black text-white tracking-tight leading-tight py-1">Puente</div>
-                                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Biológico</div>
-                            </div>
-                        </div>
-
-                        <p class="text-slate-300 text-sm leading-relaxed mt-auto">
-                            Panamá conecta dos continentes y dos océanos, creando una biodiversidad marina única en la región.
-                        </p>
-                        <p class="text-slate-500 text-[10px] mt-4 uppercase tracking-widest font-bold">
-                            Fuente: Portal Logístico de Panamá
-                        </p>
-                    </div>
-                </article>
-
-                <article class="glass-card rounded-3xl md:rounded-[2.2rem] overflow-hidden flex flex-col h-full group hover:shadow-[0_0_40px_rgba(251,113,133,0.2)] transition-all duration-500">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://animapedia.org/wp-content/uploads/2018/07/corales.jpg" alt="Arrecife de coral" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-deep-abyss via-transparent to-transparent"></div>
-                    </div>
-                    <div class="p-7 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-bold mb-5 text-coral-glow flex items-center gap-2">
-                            <span class="material-symbols-outlined">trending_up</span> Impacto Económico en Panamá
-                        </h3>
-                        
-                        <div class="grid grid-cols-2 gap-3 mb-4">
-                            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center hover:bg-white/10 transition-colors group/item">
-                                <span class="material-symbols-outlined text-coral-glow text-3xl mb-2 group-hover/item:scale-110 transition-transform">sailing</span>
-                                <div class="text-2xl font-black text-white tracking-tight">4,567 Ton</div>
-                                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Pesca</div>
-                            </div>
-                            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center hover:bg-white/10 transition-colors group/item">
-                                <span class="material-symbols-outlined text-green-400 text-3xl mb-2 group-hover/item:scale-110 transition-transform">trending_up</span>
-                                <div class="text-2xl font-black text-green-400 tracking-tight">+5.68%</div>
-                                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Crecimiento</div>
-                            </div>
-                            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center hover:bg-white/10 transition-colors group/item">
-                                <span class="material-symbols-outlined text-coral-glow text-3xl mb-2 group-hover/item:scale-110 transition-transform">nature</span>
-                                <div class="text-2xl font-black text-white tracking-tight">770 km²</div>
-                                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Corales</div>
-                            </div>
-                            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center hover:bg-white/10 transition-colors group/item">
-                                <span class="material-symbols-outlined text-coral-glow text-3xl mb-2 group-hover/item:scale-110 transition-transform">beach_access</span>
-                                <div class="text-lg font-black text-white tracking-tight leading-tight py-1">Turismo</div>
-                                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Clave</div>
-                            </div>
-                        </div>
-
-                        <p class="text-slate-300 text-sm leading-relaxed mt-auto">
-                            Los ecosistemas marinos no solo albergan biodiversidad, sino que protegen las costas y sostienen la economía nacional.
-                        </p>
-                        <p class="text-slate-500 text-[10px] mt-4 uppercase tracking-widest font-bold">
-                            Fuentes: ARAP y MiAMBIENTE
-                        </p>
-                    </div>
-                </article>
             </div>
         </div>
     </section>

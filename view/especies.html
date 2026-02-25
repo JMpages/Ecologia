@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -82,7 +82,7 @@
                 <span class="text-primary font-bold tracking-widest uppercase text-xs">Biodiversidad Panameña</span>
                 <h1 class="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter mt-4 mb-8">Especies Marinas</h1>
                 <p class="text-xl text-slate-200 max-w-3xl mx-auto">
-                    Panamá es un puente de vida. Descubre las especies clave que habitan nuestros océanos, su importancia ecológica y su estado de conservación.
+                    Panamá es un puente de vida. Descubre las especies clave que habitan nuestros océanos y cómo la contaminación amenaza su supervivencia. Conoce su importancia ecológica y qué podemos hacer para protegerlas.
                 </p>
             </div>
 
@@ -94,7 +94,7 @@
             </div>
 
             <!-- Grid de Especies -->
-            <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+            <div class="species-layout-alt grid grid-cols-1 gap-8">
                 <!-- Card 1: Ballena Jorobada -->
                 <article class="species-card glass-card rounded-[2.5rem] overflow-hidden group hover:shadow-[0_0_50px_rgba(136,198,241,0.2)] transition-all duration-500 border border-white/10 flex flex-col" data-ocean="pacifico">
                     <div class="h-72 overflow-hidden relative shrink-0">
@@ -116,7 +116,7 @@
                             </div>
                             <div>
                                 <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Ubicación</h4>
-                                <p class="text-slate-100 font-medium">Archipiélago de las Perlas y P.N. Coiba</p>
+                                <p class="text-slate-100 font-medium">Archipiélago de las Perlas y Parque Nacional Coiba</p>
                             </div>
                         </div>
                         <!-- Amenaza -->
@@ -124,7 +124,7 @@
                             <h4 class="text-sm font-bold text-orange-300 mb-2 flex items-center gap-2">
                                 <span class="material-symbols-outlined text-lg">warning</span> Amenazas
                             </h4>
-                            <p class="text-sm text-slate-300 leading-relaxed">Colisiones con grandes buques en rutas de navegación y enredo en redes de pesca fantasma.</p>
+                            <p class="text-sm text-slate-300 leading-relaxed">Enredo en redes de pesca fantasma abandonadas, el estrés por la contaminación acústica del tráfico marítimo y la peligrosa ingesta de plásticos en sus zonas de alimentación.</p>
                         </div>
                         <!-- Acción (Spacer para empujar al fondo) -->
                         <div class="mt-auto pt-4">
@@ -141,6 +141,10 @@
                                         <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
                                         <span>Reportar redes abandonadas a las autoridades.</span>
                                     </li>
+                                    <li class="flex items-start gap-2 text-sm text-slate-200">
+                                        <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
+                                        <span>Apoyar iniciativas de limpieza costera.</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -150,7 +154,7 @@
                 <!-- Card 2: Tortuga Carey -->
                 <article class="species-card glass-card rounded-[2.5rem] overflow-hidden group hover:shadow-[0_0_50px_rgba(136,198,241,0.2)] transition-all duration-500 border border-white/10 flex flex-col" data-ocean="atlantico">
                     <div class="h-72 overflow-hidden relative shrink-0">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Tortuga_carey_%28Eretmochelys_imbricata%29%2C_parque_nacional_Ras_Muhammad%2C_Egipto%2C_2022-03-28%2C_DD_56.jpg/1280px-Tortuga_carey_%28Eretmochelys_imbricata%29%2C_parque_nacional_Ras_Muhammad%2C_Egipto%2C_2022-03-28%2C_DD_56.jpg" alt="Tortuga Carey" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <img src="https://maralliance.org/wp-content/uploads/2025/06/Hawksbill-turtle-CC-Rachel-Graham_MarAlliance-1024x796-1.webp" alt="Tortuga Carey" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-abyss via-transparent to-transparent opacity-90"></div>
                         <div class="absolute bottom-0 left-0 w-full p-6">
                             <h3 class="text-3xl font-black text-white mb-1 tracking-tight">Tortuga Carey</h3>
@@ -174,7 +178,7 @@
                             <h4 class="text-sm font-bold text-red-400 mb-2 flex items-center gap-2">
                                 <span class="material-symbols-outlined text-lg">warning</span> Amenazas
                             </h4>
-                            <p class="text-sm text-slate-300 leading-relaxed">Caza furtiva por su caparazón (artesanías) y saqueo de huevos en playas de anidación.</p>
+                            <p class="text-sm text-slate-300 leading-relaxed">Ingestión de plásticos al confundirlos con comida, sumado a la contaminación que degrada los arrecifes donde buscan refugio y alimento.</p>
                         </div>
                         <div class="mt-auto pt-4">
                             <div class="bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 rounded-2xl p-5 relative overflow-hidden">
@@ -184,11 +188,11 @@
                                 <ul class="space-y-2 relative z-10">
                                     <li class="flex items-start gap-2 text-sm text-slate-200">
                                         <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
-                                        <span>No comprar artesanías de "carey".</span>
+                                        <span>Reducir el uso de plásticos que puedan llegar al mar.</span>
                                     </li>
                                     <li class="flex items-start gap-2 text-sm text-slate-200">
                                         <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
-                                        <span>Evitar luces artificiales en playas de anidación.</span>
+                                        <span>No dejar basura ni restos de comida en la playa.</span>
                                     </li>
                                 </ul>
                             </div>
@@ -223,7 +227,7 @@
                             <h4 class="text-sm font-bold text-red-400 mb-2 flex items-center gap-2">
                                 <span class="material-symbols-outlined text-lg">warning</span> Amenazas
                             </h4>
-                            <p class="text-sm text-slate-300 leading-relaxed">Pesca ilegal para obtener sus aletas (aleteo) y captura incidental en redes industriales.</p>
+                            <p class="text-sm text-slate-300 leading-relaxed">Bioacumulación de metales pesados y contaminación que afecta su cadena alimenticia.</p>
                         </div>
                         <div class="mt-auto pt-4">
                             <div class="bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 rounded-2xl p-5 relative overflow-hidden">
@@ -233,11 +237,11 @@
                                 <ul class="space-y-2 relative z-10">
                                     <li class="flex items-start gap-2 text-sm text-slate-200">
                                         <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
-                                        <span>No consumir sopa de aleta de tiburón.</span>
+                                        <span>Apoyar la creación y protección de corredores marinos.</span>
                                     </li>
                                     <li class="flex items-start gap-2 text-sm text-slate-200">
                                         <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
-                                        <span>Apoyar la creación de corredores marinos.</span>
+                                        <span>Reducir el uso de plásticos que puedan terminar en el océano.</span>
                                     </li>
                                 </ul>
                             </div>
@@ -248,7 +252,7 @@
                 <!-- Card 4: Manatí Antillano -->
                 <article class="species-card glass-card rounded-[2.5rem] overflow-hidden group hover:shadow-[0_0_50px_rgba(136,198,241,0.2)] transition-all duration-500 border border-white/10 flex flex-col" data-ocean="atlantico">
                     <div class="h-72 overflow-hidden relative shrink-0">
-                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Underwater_photography_of_mammal_manatee.jpg" alt="Manatí" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <img src="https://cdn.agenciasinc.es/var/ezwebin_site/storage/images/_aliases/img_1col/noticias/se-recupera-la-poblacion-de-manati-antillano-en-panama/6034701-4-esl-MX/Se-recupera-la-poblacion-de-manati-antillano-en-Panama.jpg" alt="Manatí" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-abyss via-transparent to-transparent opacity-90"></div>
                         <div class="absolute bottom-0 left-0 w-full p-6">
                             <h3 class="text-3xl font-black text-white mb-1 tracking-tight">Manatí Antillano</h3>
@@ -272,7 +276,7 @@
                             <h4 class="text-sm font-bold text-orange-300 mb-2 flex items-center gap-2">
                                 <span class="material-symbols-outlined text-lg">warning</span> Amenazas
                             </h4>
-                            <p class="text-sm text-slate-300 leading-relaxed">Colisiones con lanchas rápidas, contaminación de ríos con agroquímicos y caza ilegal.</p>
+                            <p class="text-sm text-slate-300 leading-relaxed">Contaminación de ríos con agroquímicos que llegan al mar y presencia de basura, desechos en estuarios y zonas costeras.</p>
                         </div>
                         <div class="mt-auto pt-4">
                             <div class="bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 rounded-2xl p-5 relative overflow-hidden">
@@ -282,11 +286,15 @@
                                 <ul class="space-y-2 relative z-10">
                                     <li class="flex items-start gap-2 text-sm text-slate-200">
                                         <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
-                                        <span>Navegar a baja velocidad en estuarios.</span>
+                                        <span>No tirar basura en ríos que desembocan en el mar.</span>
                                     </li>
                                     <li class="flex items-start gap-2 text-sm text-slate-200">
                                         <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
-                                        <span>No tirar basura en ríos que desembocan al mar.</span>
+                                        <span>Reducir el uso de productos químicos que puedan contaminar el agua.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-sm text-slate-200">
+                                        <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
+                                        <span>Apoyar áreas protegidas donde habita el manatí.</span>
                                     </li>
                                 </ul>
                             </div>
@@ -297,7 +305,7 @@
                 <!-- Card 5: Coral Cuerno de Alce -->
                 <article class="species-card glass-card rounded-[2.5rem] overflow-hidden group hover:shadow-[0_0_50px_rgba(136,198,241,0.2)] transition-all duration-500 border border-white/10 flex flex-col" data-ocean="atlantico">
                     <div class="h-72 overflow-hidden relative shrink-0">
-                        <img src="https://www.fishipedia.es/wp-content/uploads/2022/06/Acropora-palmata-725x483.jpg" alt="Coral Cuerno de Alce" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <img src="https://nexpanama.com/wp-content/uploads/2019/10/coral_learn_page.jpg" alt="Coral Cuerno de Alce" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-abyss via-transparent to-transparent opacity-90"></div>
                         <div class="absolute bottom-0 left-0 w-full p-6">
                             <h3 class="text-3xl font-black text-white mb-1 tracking-tight">Coral Cuerno de Alce</h3>
@@ -314,14 +322,14 @@
                             </div>
                             <div>
                                 <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Ubicación</h4>
-                                <p class="text-slate-100 font-medium">Caribe Panameño (Bocas, Guna Yala)</p>
+                                <p class="text-slate-100 font-medium">Caribe panameño (Bocas del Toro y Guna Yala)</p>
                             </div>
                         </div>
                         <div class="relative pl-4 border-l-2 border-red-500/50">
                             <h4 class="text-sm font-bold text-red-400 mb-2 flex items-center gap-2">
                                 <span class="material-symbols-outlined text-lg">warning</span> Amenazas
                             </h4>
-                            <p class="text-sm text-slate-300 leading-relaxed">Blanqueamiento por aumento de temperatura del mar y enfermedades bacterianas.</p>
+                            <p class="text-sm text-slate-300 leading-relaxed">Blanqueamiento causado por el aumento de la temperatura del mar y contaminación del agua por químicos y desechos que debilitan los arrecifes.</p>
                         </div>
                         <div class="mt-auto pt-4">
                             <div class="bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 rounded-2xl p-5 relative overflow-hidden">
@@ -335,7 +343,7 @@
                                     </li>
                                     <li class="flex items-start gap-2 text-sm text-slate-200">
                                         <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
-                                        <span>Usar bloqueador solar "Reef Safe" (sin oxibenzona).</span>
+                                        <span>Reducir el uso de fertilizantes y químicos que puedan llegar al mar.</span>
                                     </li>
                                 </ul>
                             </div>
@@ -343,14 +351,14 @@
                     </div>
                 </article>
 
-                <!-- Card 6: Mangle Rojo -->
+                <!-- Card 6: Cangrejo Azul -->
                 <article class="species-card glass-card rounded-[2.5rem] overflow-hidden group hover:shadow-[0_0_50px_rgba(136,198,241,0.2)] transition-all duration-500 border border-white/10 flex flex-col" data-ocean="pacifico">
                     <div class="h-72 overflow-hidden relative shrink-0">
-                        <img src="https://www.aquariumbiarritz.com/wp-content/uploads/2025/06/paletuvier-rouge.jpg" alt="Mangle Rojo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <img src="https://sertv.gob.pa/crisolfm/wp-content/uploads/sites/2/2020/05/cangrejo-azul.jpg" alt="Cangrejo Azul" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-abyss via-transparent to-transparent opacity-90"></div>
                         <div class="absolute bottom-0 left-0 w-full p-6">
-                            <h3 class="text-3xl font-black text-white mb-1 tracking-tight">Mangle Rojo</h3>
-                            <p class="text-primary font-serif italic text-lg opacity-90">Rhizophora mangle</p>
+                            <h3 class="text-3xl font-black text-white mb-1 tracking-tight">Cangrejo Azul</h3>
+                            <p class="text-primary font-serif italic text-lg opacity-90">Callinectes sapidus</p>
                         </div>
                         <div class="absolute top-4 right-4 bg-green-500/20 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-green-300 border border-green-500/30 flex items-center gap-2">
                             <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> Preocupación Menor
@@ -363,14 +371,14 @@
                             </div>
                             <div>
                                 <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Ubicación</h4>
-                                <p class="text-slate-100 font-medium">Golfo de San Miguel y Montijo</p>
+                                <p class="text-slate-100 font-medium">Bahía de Panamá, Golfo de Montijo, estuarios y zonas costeras del Pacífico panameño.</p>
                             </div>
                         </div>
                         <div class="relative pl-4 border-l-2 border-orange-400/50">
                             <h4 class="text-sm font-bold text-orange-300 mb-2 flex items-center gap-2">
                                 <span class="material-symbols-outlined text-lg">warning</span> Amenazas
                             </h4>
-                            <p class="text-sm text-slate-300 leading-relaxed">Tala ilegal para desarrollo costero, ganadería y contaminación por basura atrapada en raíces.</p>
+                            <p class="text-sm text-slate-300 leading-relaxed">Contaminación por aguas residuales y desechos industriales, acumulación de plásticos en zonas costeras y contaminación por agroquímicos que llegan desde ríos.</p>
                         </div>
                         <div class="mt-auto pt-4">
                             <div class="bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 rounded-2xl p-5 relative overflow-hidden">
@@ -380,11 +388,11 @@
                                 <ul class="space-y-2 relative z-10">
                                     <li class="flex items-start gap-2 text-sm text-slate-200">
                                         <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
-                                        <span>Participar en jornadas de reforestación.</span>
+                                        <span>Reducir el uso de plásticos de un solo uso.</span>
                                     </li>
                                     <li class="flex items-start gap-2 text-sm text-slate-200">
                                         <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
-                                        <span>No lanzar desechos a ríos y quebradas.</span>
+                                        <span>Apoyar la limpieza de estuarios y zonas costeras.</span>
                                     </li>
                                 </ul>
                             </div>
@@ -395,7 +403,7 @@
                 <!-- Card 7: Playero Occidental -->
                 <article class="species-card glass-card rounded-[2.5rem] overflow-hidden group hover:shadow-[0_0_50px_rgba(136,198,241,0.2)] transition-all duration-500 border border-white/10 flex flex-col" data-ocean="pacifico">
                     <div class="h-72 overflow-hidden relative shrink-0">
-                        <img src="https://www.avesdechile.cl/0jpgn/164om1.jpg" alt="Playero Occidental" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <img src="https://scontent.fpac1-2.fna.fbcdn.net/v/t1.6435-9/91003305_3129218533763905_4894172030439522304_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=13d280&_nc_ohc=fnWYy_jWAlEQ7kNvwHVDHVL&_nc_oc=AdlKw4vJXuwzlMyMp21ECuvxFz-KPZGm3CLDL9e7DjDwr9zrYZYmRszwaxtMgZzGmbs&_nc_zt=23&_nc_ht=scontent.fpac1-2.fna&_nc_gid=yDFzqAv89sQC548uuluM5g&oh=00_Afs5LLg3usQEd4yqP1QBu0RPeJv9KquDCeC_3YOv-2KjGQ&oe=69C59861" alt="Playero Occidental" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-abyss via-transparent to-transparent opacity-90"></div>
                         <div class="absolute bottom-0 left-0 w-full p-6">
                             <h3 class="text-3xl font-black text-white mb-1 tracking-tight">Playero Occidental</h3>
@@ -419,7 +427,7 @@
                             <h4 class="text-sm font-bold text-orange-300 mb-2 flex items-center gap-2">
                                 <span class="material-symbols-outlined text-lg">warning</span> Amenazas
                             </h4>
-                            <p class="text-sm text-slate-300 leading-relaxed">Pérdida de fangales por expansión urbana y contaminación de la bahía.</p>
+                            <p class="text-sm text-slate-300 leading-relaxed">Pérdida de fangales por expansión urbana y contaminación de la bahía por desechos sólidos y aguas residuales.</p>
                         </div>
                         <div class="mt-auto pt-4">
                             <div class="bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 rounded-2xl p-5 relative overflow-hidden">
@@ -444,7 +452,7 @@
                 <!-- Card 8: Langosta Espinosa -->
                 <article class="species-card glass-card rounded-[2.5rem] overflow-hidden group hover:shadow-[0_0_50px_rgba(136,198,241,0.2)] transition-all duration-500 border border-white/10 flex flex-col" data-ocean="atlantico">
                     <div class="h-72 overflow-hidden relative shrink-0">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Panulirus_argus.jpg/500px-Panulirus_argus.jpg" alt="Langosta Espinosa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <img src="https://cedepesca.net/wp-content/uploads/2022/12/Panulirus-argus.jpg" alt="Langosta Espinosa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-abyss via-transparent to-transparent opacity-90"></div>
                         <div class="absolute bottom-0 left-0 w-full p-6">
                             <h3 class="text-3xl font-black text-white mb-1 tracking-tight">Langosta Espinosa</h3>
@@ -468,7 +476,7 @@
                             <h4 class="text-sm font-bold text-yellow-300 mb-2 flex items-center gap-2">
                                 <span class="material-symbols-outlined text-lg">warning</span> Amenazas
                             </h4>
-                            <p class="text-sm text-slate-300 leading-relaxed">Sobrepesca, captura de juveniles y hembras con huevos, irrespeto a las vedas.</p>
+                            <p class="text-sm text-slate-300 leading-relaxed">Contaminación que deteriora los arrecifes y reduce sus zonas de refugio, también afecta su desarrollo y reproducción.</p>
                         </div>
                         <div class="mt-auto pt-4">
                             <div class="bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 rounded-2xl p-5 relative overflow-hidden">
@@ -478,11 +486,11 @@
                                 <ul class="space-y-2 relative z-10">
                                     <li class="flex items-start gap-2 text-sm text-slate-200">
                                         <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
-                                        <span>Respetar la veda (Marzo a Junio).</span>
+                                        <span>Apoyar iniciativas que protejan los arrecifes de coral.</span>
                                     </li>
                                     <li class="flex items-start gap-2 text-sm text-slate-200">
                                         <span class="material-symbols-outlined text-green-400 text-base mt-0.5">check_circle</span>
-                                        <span>No consumir langostas pequeñas.</span>
+                                        <span>Evitar el uso de productos químicos que contaminen el agua.</span>
                                     </li>
                                 </ul>
                             </div>
@@ -518,5 +526,6 @@
                 });
             });
         });
-    </script>`r`n</body>
+    </script>
+</body>
 </html>
