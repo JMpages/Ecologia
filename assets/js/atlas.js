@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
             category: "arrecife",
             risk: "Medio",
             cause: "Contaminación por escorrentía agrícola y desechos plásticos traídos por corrientes marinas.",
-            image: "https://es.tourismpanama.com"
+            image: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_674,q_75,w_1200/v1/clients/panama-update/DJI_0566_e685be96-bee2-4006-8e61-8ef1794af5e3.jpg"
         },
         {
             coords: [9.34, -82.25],
